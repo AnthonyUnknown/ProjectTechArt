@@ -47,6 +47,18 @@ class AppContainer extends Component<AppProps, AppState> {
           <h2>Test-block for svg-url-loader</h2>
           <img src={imgCamera} alt="small_SVG_Image" />
           <div>123</div>
+          <div>321</div>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
         </div>
       </StrictMode>
     );
