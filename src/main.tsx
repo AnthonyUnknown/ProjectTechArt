@@ -11,8 +11,36 @@ import SignUp from "./users/signup";
 import SignIn from "./users/signin";
 import Footer from "./products/footer";
 
-class AppContainer extends Component {
+interface AppProps {
+  nothing?: boolean;
+}
+interface AppState {
+  hasError: boolean;
+}
+
+class AppContainer extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
+    super(props);
+    this.state = {
+      hasError: false,
+    };
+  }
+
+  componentDidCatch() {
+    this.setState({ hasError: true });
+  }
+
   render() {
+    if (this.state.hasError) {
+      return (
+        <div className="error-main">
+          <p>Just Error!</p>
+          <button className="error-button" onClick={() => console.log("This is error")} type="button">
+            Show error in console
+          </button>
+        </div>
+      );
+    }
     return (
       <StrictMode>
         <BrowserRouter>
@@ -24,6 +52,7 @@ class AppContainer extends Component {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="*" element={<HomePage />} />
           </Routes>
           <Footer />
         </BrowserRouter>

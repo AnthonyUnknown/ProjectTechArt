@@ -1,3 +1,3 @@
-const AboutPage: React.FC = () => <div>AboutPage!!!</div>;
+const AboutPage: React.FC = () => <div style={{ height: "300px" }}>AboutPage!!!</div>;
 
 export default AboutPage;

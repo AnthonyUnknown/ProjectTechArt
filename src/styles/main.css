@@ -4,4 +4,22 @@
 
 body {
   font-family: "OpenSans-Regular", fantasy;
+  max-width: 1150px;
+}
+
+.error-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 30px;
+}
+
+.error-button {
+  margin-top: 50px;
+  background: darkred;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
 }
