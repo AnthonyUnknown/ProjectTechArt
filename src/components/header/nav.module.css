@@ -4,15 +4,11 @@
   flex-direction: row;
 }
 
-.li {
+.li,
+.liProd {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.liProd {
-  display: flex;
-  flex-direction: column;
 }
 
 .a,
