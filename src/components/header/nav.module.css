@@ -4,12 +4,15 @@
   flex-direction: row;
 }
 
-.li {
+.li,
+.liProd {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.a {
+.a,
+.prod {
   display: block;
   padding-left: 30px;
   padding-right: 30px;
@@ -19,106 +22,12 @@
   text-align: center;
   color: white;
   height: 50px;
-  transition: 0.5s all ease;
+  transition: 0.6s all ease;
 }
 
-.a:hover {
-  border-bottom: 5px solid purple;
-  transition: 0.5s all ease;
-  background: rgb(183, 183, 184);
-}
-
-.prod {
-  position: relative;
-  display: block;
-  padding-left: 40px;
-  padding-right: 40px;
-  text-decoration: none;
-  font-size: 14px;
-  line-height: 50px;
-  text-align: center;
-  color: white;
-  height: 50px;
-  transition: 0.5s all ease;
-}
-
+.a:hover,
 .prod:hover {
   border-bottom: 5px solid purple;
-  transition: 0.5s all ease;
-  background: rgb(183, 183, 184);
-}
-
-.ul1 {
-  display: none;
-}
-
-.li:hover .ul1 {
-  display: block;
-  transition: 1s all ease;
-}
-
-.a1 {
-  position: absolute;
-  display: block;
-  height: 50px;
-  top: 50px;
-  padding-left: 60px;
-  padding-right: 60px;
-  text-decoration: none;
-  font-size: 14px;
-  line-height: 50px;
-  text-align: center;
-  color: white;
-  transition: 0.5s all ease;
-  background: rgb(82, 81, 81);
-  left: 574px;
-}
-
-.a2 {
-  position: absolute;
-  display: block;
-  height: 50px;
-  top: 100px;
-  padding-left: 27px;
-  padding-right: 27px;
-  text-decoration: none;
-  font-size: 14px;
-  line-height: 50px;
-  text-align: center;
-  color: white;
-  transition: 0.5s all ease;
-  background: rgb(82, 81, 81);
-  left: 574px;
-}
-
-.a3 {
-  position: absolute;
-  display: block;
-  height: 50px;
-  top: 150px;
-  padding-left: 37px;
-  padding-right: 37.5px;
-  text-decoration: none;
-  font-size: 14px;
-  line-height: 50px;
-  text-align: center;
-  color: white;
-  transition: 0.5s all ease;
-  background: rgb(82, 81, 81);
-  left: 574px;
-}
-
-.a1:hover {
-  transition: 0.5s all ease;
-  background: rgb(183, 183, 184);
-}
-
-.a2:hover {
-  transition: 0.5s all ease;
-  background: rgb(183, 183, 184);
-}
-
-.a3:hover {
-  transition: 0.5s all ease;
+  transition: 0.6s all ease-out;
   background: rgb(183, 183, 184);
 }

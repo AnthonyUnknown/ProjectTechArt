@@ -1,6 +1,5 @@
 .footer {
-  max-width: 1150px;
-  height: 300px;
+  height: 150px;
   color: white;
   background: black;
 }
@@ -11,16 +10,26 @@
   font-size: 14px;
 }
 
-.icon {
+.iconFirst,
+.iconSecond,
+.iconThird {
   width: 50px;
   height: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
+  transition: all 0.7s ease-in-out;
+  border: 1px solid gray;
+}
+
+.iconFirst:hover,
+.iconSecond:hover,
+.iconThird:hover {
+  width: 55px;
+  height: 55px;
+  transition: all 0.7s ease-in-out;
+  border: 1px solid rgb(195, 228, 206);
 }
 
 .block {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-evenly;
+  padding-top: 10px;
 }

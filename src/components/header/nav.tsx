@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { VscChevronDown } from "react-icons/vsc";
 import classes from "./nav.module.css";
 
 const Nav: React.FC = () => (
@@ -9,27 +10,11 @@ const Nav: React.FC = () => (
           Home
         </NavLink>
       </li>
-      <li className={classes.li}>
+      <li className={classes.liProd}>
         <NavLink className={classes.prod} to="/">
           Products
+          <VscChevronDown />
         </NavLink>
-        <ul className={classes.ul1}>
-          <li className={classes.li1}>
-            <NavLink className={classes.a1} to="/c">
-              PC
-            </NavLink>
-          </li>
-          <li className={classes.li1}>
-            <NavLink className={classes.a2} to="/b">
-              Playstation 5
-            </NavLink>
-          </li>
-          <li className={classes.li1}>
-            <NavLink className={classes.a3} to="/a">
-              Xbox One
-            </NavLink>
-          </li>
-        </ul>
       </li>
       <li className={classes.li}>
         <NavLink className={classes.a} to="/about">
