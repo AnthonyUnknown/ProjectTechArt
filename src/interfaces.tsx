@@ -5,5 +5,5 @@ export interface ICard {
   price: string;
   text: string;
   stars: Array<string>;
-  gameLaunch: string;
+  date: string;
 }

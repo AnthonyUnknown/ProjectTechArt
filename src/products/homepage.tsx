@@ -4,56 +4,56 @@ import { AiFillWindows } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import Card from "@/elements/card";
 import { ICard } from "@/interfaces";
-import { ChangeEvent, useState } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
+import axios from "axios";
 import classes from "./productsStyles/homePage.module.css";
 
-interface ICardMap {
-  cards: ICard[];
-}
+const HomePage: React.FC = () => {
+  const [getCards, setGetCards] = useState<ICard[]>([]);
+  const [search, setSearch] = useState<string>("");
+  const [searchGames, setSearchGames] = useState<ICard[]>([]);
 
-interface IGamer {
-  game: string;
-}
+  function searchChanger(event: ChangeEvent<HTMLInputElement>) {
+    setSearch(event.target.value);
+  }
 
-const HomePage: React.FC<ICardMap> = ({ cards }) => {
-  const [search, setSearch] = useState<IGamer[]>([]);
-
-  const topGames = cards.filter((topgame) => topgame.id < 3); // 3 топ игры
-
-  function Changer(event: ChangeEvent<HTMLInputElement>) {
-    // поиск
-    const searchItem = event.target.value;
-    const newFilter = cards.filter((searchcard) => searchcard.game.toLowerCase().includes(searchItem.toLowerCase()));
-
-    if (searchItem === "") {
-      // поиск
-      setSearch([]);
-    } else {
-      setSearch(newFilter);
+  async function searchCards() {
+    try {
+      const resp = await axios.get<ICard[]>(`http://localhost:3000/cards?game_like=${search}`);
+      setSearchGames(resp.data);
+    } catch (e) {
+      alert(e);
     }
   }
+
+  async function fetchTopCards() {
+    try {
+      const response = await axios.get<ICard[]>("http://localhost:3000/cards?_start=0&_end=3,sort=date&_order=desc");
+      setGetCards(response.data);
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  useEffect(() => {
+    searchCards();
+  }, [search]);
+
+  useEffect(() => {
+    fetchTopCards();
+  }, []);
 
   return (
     <div className={classes.wrapperHomePage}>
       <div className={classes.placeHolderBlock}>
-        <InputBig placeholder="Search" onChange={Changer} />
+        <InputBig placeholder="Search" Changer={searchChanger} />
       </div>
       <div className={classes.searchPage}>
-        {search.length !== 0 && (
-          <div className={classes.result}>
-            {search.slice(0, 15).map((gamer: IGamer) => (
-              <div
-                className={classes.resultItem}
-                onKeyDown={() => console.log("")}
-                role="button"
-                tabIndex={0}
-                onClick={() => alert("Got game!")}
-              >
-                <p>{gamer.game}</p>
-              </div>
-            ))}
+        {searchGames.map((searchgame) => (
+          <div className={classes.searcher} key={searchgame.id}>
+            {searchgame.game}
           </div>
-        )}
+        ))}
       </div>
       <div className={classes.categories}>
         <p className={classes.categoriesName}>Categories</p>
@@ -75,7 +75,7 @@ const HomePage: React.FC<ICardMap> = ({ cards }) => {
       <div className={classes.topGamesBlock}>
         <p className={classes.title}>New Games</p>
         <div className={classes.threeTopGames}>
-          {topGames.map((card) => (
+          {getCards.map((card) => (
             <Card card={card} key={card.id} />
           ))}
         </div>

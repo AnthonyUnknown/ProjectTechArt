@@ -1,18 +1,8 @@
-import { ICard } from "@/interfaces";
 import { useParams } from "react-router-dom";
 
-interface IGameLauncher {
-  cards: ICard[];
-}
-
-const GameLauncher: React.FC<IGameLauncher> = ({ cards }) => {
+const GameLauncher: React.FC = () => {
   const { title } = useParams();
-  return (
-    <div>
-      Params!!!{title}
-      {cards[0].gameLaunch}
-    </div>
-  );
+  return <div>Params!!!{title}</div>;
 };
 
 export default GameLauncher;

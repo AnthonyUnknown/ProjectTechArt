@@ -81,47 +81,17 @@
   border-bottom: 2px solid black;
 }
 
-.result {
-  margin-top: 5px;
-  width: 500px;
-  height: 88px;
-  background-color: lightgrey;
-  overflow: hidden;
-  overflow-y: auto;
-  border-radius: 5px;
-}
-
-.result::-webkit-scrollbar {
-  display: none;
-}
-
-.result .resultItem {
-  width: 100%;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  color: black;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  cursor: pointer;
-}
-
-.resultItem p {
-  margin-left: 5px;
-}
-
-.resultItem:hover {
-  background-color: white;
-}
-
-.searchPage {
-  height: 50px;
-}
-
 .categoriesName {
   margin-left: 10px;
   margin-right: 10px;
   color: black;
   font-weight: bold;
   border-bottom: 2px solid black;
+}
+
+.searcher {
+  width: 500px;
+  background: lightgray;
+  color: black;
+  font-size: 14px;
 }

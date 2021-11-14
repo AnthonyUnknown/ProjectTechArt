@@ -4,14 +4,12 @@ import "./styles/main.scss";
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
 import Header from "./components/header/header";
 import HomePage from "./products/homePage";
 import AboutPage from "./products/aboutPage";
 import SignUp from "./users/signup";
 import SignIn from "./users/signin";
 import Footer from "./products/footer";
-import { ICard } from "./interfaces";
 import GameLauncher from "./components/gameLauncher/gameLauncher";
 
 interface AppProps {
@@ -20,7 +18,6 @@ interface AppProps {
 
 interface AppState {
   hasError: boolean;
-  cards: ICard[];
 }
 
 class AppContainer extends Component<AppProps, AppState> {
@@ -28,18 +25,7 @@ class AppContainer extends Component<AppProps, AppState> {
     super(props);
     this.state = {
       hasError: false,
-      cards: [],
     };
-  }
-
-  async componentDidMount() {
-    try {
-      const response = await axios.get<ICard[]>("http://localhost:3000/cards");
-      const resp = response.data;
-      this.setState({ cards: resp });
-    } catch (e) {
-      alert(e);
-    }
   }
 
   componentDidCatch() {
@@ -64,12 +50,12 @@ class AppContainer extends Component<AppProps, AppState> {
             <Header />
           </div>
           <Routes>
-            <Route path="/" element={<HomePage cards={this.state.cards} />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="*" element={<HomePage cards={this.state.cards} />} />
-            <Route path="/games/:title" element={<GameLauncher cards={this.state.cards} />} />
+            <Route path="*" element={<HomePage />} />
+            <Route path="/games/:title" element={<GameLauncher />} />
           </Routes>
           <Footer />
         </BrowserRouter>
