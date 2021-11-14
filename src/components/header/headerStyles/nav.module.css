@@ -20,9 +20,15 @@
   font-size: 14px;
   line-height: 50px;
   text-align: center;
-  color: white;
+  color: purple;
   height: 50px;
   transition: 0.6s all ease;
+  font-weight: 700;
+}
+
+.prod {
+  position: relative;
+  transition: display 1s ease-in;
 }
 
 .a:hover,
@@ -30,4 +36,36 @@
   border-bottom: 5px solid purple;
   transition: 0.6s all ease-out;
   background: rgb(183, 183, 184);
+}
+
+.a:active,
+.prod:active {
+  color: darkcyan;
+}
+
+.li1 {
+  display: block;
+  height: 30px;
+  background: rgb(214, 211, 211);
+  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 1px solid purple;
+}
+
+.a1,
+.a2,
+.a3 {
+  text-decoration: none;
+  color: purple;
+}
+
+.ul1 {
+  position: absolute;
+  top: 50px;
+  display: none;
+}
+
+.liProd:hover > .ul1 {
+  display: block;
 }

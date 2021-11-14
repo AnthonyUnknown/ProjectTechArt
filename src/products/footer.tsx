@@ -1,4 +1,4 @@
-import classes from "./footer.module.css";
+import classes from "./productsStyles/footer.module.css";
 
 const Footer: React.FC = () => (
   <footer className={classes.footer}>

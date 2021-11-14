@@ -1,5 +1,5 @@
 import Nav from "./nav";
-import headers from "./header.module.css";
+import headers from "./headerStyles/header.module.css";
 
 const Header: React.FC = () => (
   <header className={headers.header}>
