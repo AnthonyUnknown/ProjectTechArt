@@ -22,6 +22,18 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
+}
+
+.iconsGames {
+  position: absolute;
+}
+
+.iconsGamesFlex {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(252, 247, 252);
+  border-radius: 5px;
 }
 
 .frontCard,

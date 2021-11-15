@@ -3,11 +3,10 @@ import classes from "./elementStyles/inputBig.module.css";
 
 interface InputPropsTypes {
   placeholder: string;
-  Changer: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
 }
 
-const InputBig: React.FC<InputPropsTypes> = ({ placeholder, Changer }) => (
-  <input className={classes.placeholder} type="text" placeholder={placeholder} onChange={Changer} />
-);
+const InputBig: React.FC<InputPropsTypes> = (props) => <input className={classes.placeholder} {...props} />;
 
 export default InputBig;

@@ -6,38 +6,39 @@ import Card from "@/elements/card";
 import { ICard } from "@/interfaces";
 import { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
+import endpoints from "@/endpoints";
 import classes from "./productsStyles/homePage.module.css";
+import apiGetTopCards from "./apiHomePage";
 
 const HomePage: React.FC = () => {
   const [getCards, setGetCards] = useState<ICard[]>([]);
   const [search, setSearch] = useState<string>("");
   const [searchGames, setSearchGames] = useState<ICard[]>([]);
 
-  function searchChanger(event: ChangeEvent<HTMLInputElement>) {
+  async function searchChanger(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value);
-  }
 
-  async function searchCards() {
+    if (event.target.value === "") {
+      return setSearchGames([]);
+    }
     try {
-      const resp = await axios.get<ICard[]>(`http://localhost:3000/cards?game_like=${search}`);
+      const resp = await axios.get<ICard[]>(endpoints.searchGames(event.target.value));
       setSearchGames(resp.data);
+      return null;
     } catch (e) {
       alert(e);
     }
+    return null;
   }
 
   async function fetchTopCards() {
     try {
-      const response = await axios.get<ICard[]>("http://localhost:3000/cards?_start=0&_end=3,sort=date&_order=desc");
-      setGetCards(response.data);
+      const data = await apiGetTopCards();
+      setGetCards(data);
     } catch (e) {
       alert(e);
     }
   }
-
-  useEffect(() => {
-    searchCards();
-  }, [search]);
 
   useEffect(() => {
     fetchTopCards();
@@ -46,11 +47,18 @@ const HomePage: React.FC = () => {
   return (
     <div className={classes.wrapperHomePage}>
       <div className={classes.placeHolderBlock}>
-        <InputBig placeholder="Search" Changer={searchChanger} />
+        <InputBig value={search} placeholder="Search" onChange={searchChanger} />
       </div>
       <div className={classes.searchPage}>
         {searchGames.map((searchgame) => (
-          <div className={classes.searcher} key={searchgame.id}>
+          <div
+            role="button"
+            tabIndex={0}
+            onKeyDown={() => alert("Got item!")}
+            onClick={() => alert("Got item!")}
+            className={classes.searcher}
+            key={searchgame.id}
+          >
             {searchgame.game}
           </div>
         ))}

@@ -94,4 +94,10 @@
   background: lightgray;
   color: black;
   font-size: 14px;
+  border: 1px solid purple;
+  cursor: pointer;
+}
+
+.searchPage {
+  height: 20px;
 }
