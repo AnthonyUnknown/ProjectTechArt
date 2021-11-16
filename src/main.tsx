@@ -7,8 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/header/header";
 import HomePage from "./products/homePage";
 import AboutPage from "./products/aboutPage";
-import SignUp from "./users/signup";
-import SignIn from "./users/signin";
+import UserPage from "./users/userPage";
 import Footer from "./products/footer";
 import GameLauncher from "./components/gameLauncher/gameLauncher";
 
@@ -52,8 +51,7 @@ class AppContainer extends Component<AppProps, AppState> {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/userpage" element={<UserPage />} />
             <Route path="*" element={<HomePage />} />
             <Route path="/games/:title" element={<GameLauncher />} />
           </Routes>
