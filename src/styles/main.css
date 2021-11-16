@@ -3,8 +3,8 @@
 @import "fontface.css";
 
 body {
-  font-family: "OpenSans-Regular", fantasy;
-  max-width: 1150px;
+  font-family: "Merriweather Sans", sans-serif;
+  max-width: 100%;
 }
 
 .error-main {

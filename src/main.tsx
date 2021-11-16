@@ -5,15 +5,17 @@ import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/header/header";
-import HomePage from "./products/homepage";
-import AboutPage from "./products/aboutpage";
+import HomePage from "./products/homePage";
+import AboutPage from "./products/aboutPage";
 import SignUp from "./users/signup";
 import SignIn from "./users/signin";
 import Footer from "./products/footer";
+import GameLauncher from "./components/gameLauncher/gameLauncher";
 
 interface AppProps {
   nothing?: boolean;
 }
+
 interface AppState {
   hasError: boolean;
 }
@@ -53,6 +55,7 @@ class AppContainer extends Component<AppProps, AppState> {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="*" element={<HomePage />} />
+            <Route path="/games/:title" element={<GameLauncher />} />
           </Routes>
           <Footer />
         </BrowserRouter>
