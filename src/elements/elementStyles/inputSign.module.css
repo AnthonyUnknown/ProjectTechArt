@@ -1,0 +1,15 @@
+.inputSign {
+  background: rgb(58, 56, 56);
+  color: white;
+  border-radius: 5px;
+}
+
+.inputAndLabel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 30px;
+}
