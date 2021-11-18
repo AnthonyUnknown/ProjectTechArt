@@ -1,0 +1,91 @@
+{
+  "cards": [
+    {
+      "id": 0,
+      "game": "CS:GO",
+      "price": "10$",
+      "background": "https://winternode.com/games/csgo.jpg",
+      "text": "CS:GO is a team tactical first-person shooter, a kind of remake of the original modification for Half-Life. The game offers everyone who wants to fight teams of terrorists and special forces on a variety of unique maps.",
+      "stars": ["1", "2", "3", "4", "5"],
+      "gameLaunch": ["pc"],
+      "date": "2021-11-14"
+    },
+    {
+      "id": 1,
+      "game": "Grand Theft Auto V",
+      "price": "20$",
+      "background": "https://m.media-amazon.com/images/I/91T0XQv8gEL._SL1500_.jpg",
+      "text": "Grand Theft Auto V (aka GTA 5 or GTA V) is the fifteenth game in the Grand Theft Auto series, made in the Action / Sandbox genre. For the first time in the history of the series, there are three main characters in the game at once, between whom you can switch almost at any time.",
+      "stars": ["1", "2", "3", "4"],
+      "gameLaunch": ["pc", "playstation", "xbox"],
+      "date": "2021-11-14"
+    },
+    {
+      "id": 2,
+      "game": "Borderlands 3",
+      "price": "59,99$",
+      "background": "https://image.api.playstation.com/vulcan/ap/rnd/202010/1720/uUTyRJprtjAyp46TonVTWBws.png",
+      "text": "Borderlands 3 is an insane shooter triquel with RPG elements in the spirit of Diablo. The game tells the story of a new four of the Asylum Seekers who confront two twin villains who decided to unite the bandit clans and lay their hands on certain forces that affect the whole world.",
+      "stars": ["1", "2", "3"],
+      "gameLaunch": ["pc", "playstation"],
+      "date": "2021-11-14"
+    }
+  ],
+  "users": [
+    {
+      "email": "daniill@mail.ru",
+      "password": "$2a$10$2M9JmS2sf6mv0KnQMOk7jO0egx9KGDQ5QXnW2AQgL5BjeK/3moLAu",
+      "id": 1
+    },
+    {
+      "email": "dhashashd@mail.ru",
+      "password": "$2a$10$G0WdW2EvxR.ds2rlVCjW1.qk97/Y5Ovj.X0m0HUOGx.s5J9qfKkPy",
+      "id": 2
+    },
+    {
+      "email": "danila@mail.ru",
+      "password": "$2a$10$.CLODT9ZA5U.aqm7Toh3UeWxRY6l7rDBqMmaLbmQeW4jEbDm17Bm.",
+      "id": 3
+    },
+    {
+      "email": "3212321@mail.ru",
+      "password": "$2a$10$4eaHIn7OQx0dG8pPrFM65OJq25eLFen68Mx9j/59cgd/d5/dw0kNi",
+      "id": 4
+    },
+    {
+      "email": "anton@mail.ru",
+      "password": "$2a$10$bT4oRmBdJ2SBwRF0E1ieruSUaw6dpgWgAfaXzq1FwfnWkHGdItFzq",
+      "id": 5
+    },
+    {
+      "email": "aloha@mail.ru",
+      "password": "$2a$10$4xdBse51wuPERrqvEDF.ROcHRZNj27jKJ2DLu3YJkt.6.LevA1AHK",
+      "id": 6
+    },
+    {
+      "email": "romanovsky@mail.ru",
+      "password": "$2a$10$.NMRPbU16r.6P4Bsj7TuoO5bSxNRSgGt8cNZVyRf3IAu8hWhQrt7e",
+      "id": 7
+    },
+    {
+      "email": "anton1@mail.ru",
+      "password": "$2a$10$ee5.ESC.qYyVmwjkmfdgU.mTDfgK53lELjZAMT0ptcvFSU6GwzH3K",
+      "id": 8
+    },
+    {
+      "email": "anton11@mail.ru",
+      "password": "$2a$10$opudiyF9P5spZW994V7mSOiRpgf3ja9KIVgYMXiNEQIw47.OMOehC",
+      "id": 9
+    },
+    {
+      "email": "who@mail.ru",
+      "password": "$2a$10$JdxvxEKn/p8AMXuqQWCI2e.9AAhoaLXQWeWAwtbxsU4/ci7tAgqee",
+      "id": 10
+    },
+    {
+      "email": "a@mail.ru",
+      "password": "$2a$10$yV4FaA3Isw82xhXulr3/uezMzOgLjGRxSgSHO5y85vYbGddBj0M/W",
+      "id": 11
+    }
+  ]
+}

@@ -5,10 +5,8 @@ import { NavLink } from "react-router-dom";
 import Card from "@/elements/card";
 import { ICard } from "@/interfaces";
 import { useState, useEffect, ChangeEvent } from "react";
-import axios from "axios";
-import endpoints from "@/endpoints";
 import classes from "./productsStyles/homePage.module.css";
-import apiGetTopCards from "./apiHomePage";
+import { apiGetTopCards, apiSearchGames } from "./apiHomePage";
 
 const HomePage: React.FC = () => {
   const [getCards, setGetCards] = useState<ICard[]>([]);
@@ -22,8 +20,8 @@ const HomePage: React.FC = () => {
       return setSearchGames([]);
     }
     try {
-      const resp = await axios.get<ICard[]>(endpoints.searchGames(event.target.value));
-      setSearchGames(resp.data);
+      const data = await apiSearchGames(event.target.value);
+      setSearchGames(data);
       return null;
     } catch (e) {
       alert(e);
@@ -57,7 +55,7 @@ const HomePage: React.FC = () => {
             onKeyDown={() => alert("Got item!")}
             onClick={() => alert("Got item!")}
             className={classes.searcher}
-            key={searchgame.id}
+            key={Math.random()}
           >
             {searchgame.game}
           </div>
@@ -84,7 +82,7 @@ const HomePage: React.FC = () => {
         <p className={classes.title}>New Games</p>
         <div className={classes.threeTopGames}>
           {getCards.map((card) => (
-            <Card card={card} key={card.id} />
+            <Card card={card} key={Math.random()} />
           ))}
         </div>
       </div>

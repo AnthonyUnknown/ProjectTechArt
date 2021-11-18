@@ -1,11 +1,10 @@
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { VscChevronDown } from "react-icons/vsc";
 import Modal from "@/elements/modal";
-import { ChangeEvent, SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import CrossButton from "@/elements/crossButton";
 import InputSign from "@/elements/inputSign";
 import Submit from "@/elements/submit";
-import axios from "axios";
 import classes from "./headerStyles/nav.module.css";
 
 interface Ilinks {
@@ -13,12 +12,23 @@ interface Ilinks {
   about: string;
 }
 
+interface IUser {
+  email: string;
+  id: number;
+}
+
+interface INav {
+  onReg: (name: string, password: string) => Promise<void>;
+  user: IUser | null;
+  onLog: (name: string, password: string) => Promise<void>;
+}
+
 const links: Ilinks = {
   home: "/",
   about: "/about",
 };
 
-const Nav: React.FC = () => {
+const Nav: React.FC<INav> = ({ onReg, user, onLog }) => {
   const [isOpenSignIn, setIsOpenSignIn] = useState<boolean>(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState<boolean>(false);
 
@@ -37,46 +47,94 @@ const Nav: React.FC = () => {
   function onCloseSignUp(): void {
     setIsOpenSignUp(false);
   }
+  const [regObj, setRegObj] = useState({ email: "", password: "" });
+  const [repeatObj, setRepeatObj] = useState({ repeatpassword: "" });
+  const [logObj, setLogObj] = useState({ email: "", password: "" });
+  const [passErrorVal, setPassErrorVal] = useState("");
 
-  const [regLog, setRegLog] = useState<string>("");
-  const [regPass, setRegPass] = useState<string>("");
-  const [regRepeatPass, setRegRepeatPass] = useState<string>("");
+  const onChangeLogObj = (value: string, name: string) => {
+    setLogObj({
+      ...logObj,
+      [name]: value,
+    });
+  };
 
-  const [Log, setLog] = useState<string>("");
-  const [Pass, setPass] = useState<string>("");
+  const onChangeRepeatPassObj = (value: string, name: string) => {
+    setRepeatObj({
+      ...repeatObj,
+      [name]: value,
+    });
+  };
 
-  const [redirect, setRedirect] = useState<boolean>(false);
+  const onChangeRegObj = (value: string, name: string) => {
+    setRegObj({
+      ...regObj,
+      [name]: value,
+    });
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(String(regObj.email).toLowerCase())) {
+      setPassErrorVal("Incorrect email");
+    } else {
+      setPassErrorVal("");
+    }
+  };
 
-  function onChangeRegLog(event: ChangeEvent<HTMLInputElement>) {
-    setRegLog(event.target.value);
-  }
-
-  function onChangeRegPass(event: ChangeEvent<HTMLInputElement>) {
-    setRegPass(event.target.value);
-  }
-
-  function onChangeRegRepeatPass(event: ChangeEvent<HTMLInputElement>) {
-    setRegRepeatPass(event.target.value);
-  }
-
-  function onChangeLog(event: ChangeEvent<HTMLInputElement>) {
-    setLog(event.target.value);
-  }
-
-  function onChangePass(event: ChangeEvent<HTMLInputElement>) {
-    setPass(event.target.value);
-  }
+  const history = useNavigate();
 
   async function onSubmitReg(e: SyntheticEvent) {
     e.preventDefault();
-    await axios.post("http://localhost:3000/users", {
-      regLog,
-      regPass,
-    });
-    setRedirect(true);
+    await onReg(regObj.email, regObj.password);
+    history("/userpage");
+    onCloseSignUp();
   }
-  if (redirect) {
-    return <Navigate to="/userpage" />;
+
+  async function onSubmitLog(e: SyntheticEvent) {
+    e.preventDefault();
+    await onLog(logObj.email, logObj.password);
+    history("/homepage");
+    onCloseSign();
+  }
+
+  function ToUserPage(): void {
+    history("/userpage");
+  }
+  function ToHomePage(): void {
+    history("/homepage");
+  }
+
+  let menu;
+
+  if (user === null) {
+    menu = (
+      <>
+        <li className={classes.li}>
+          <div onClick={onClickSign} role="button" tabIndex={0} onKeyDown={onClickSign} className={classes.a}>
+            SignIn
+          </div>
+        </li>
+        <li className={classes.li}>
+          <div onClick={onClickSignUp} role="button" tabIndex={0} onKeyDown={onClickSignUp} className={classes.a}>
+            SignUp
+          </div>
+        </li>
+      </>
+    );
+  } else {
+    menu = (
+      <>
+        <li className={classes.li}>
+          <div onClick={ToUserPage} onKeyDown={ToUserPage} role="button" tabIndex={0} className={classes.a}>
+            UserName
+          </div>
+        </li>
+        <li className={classes.li}>
+          <div onClick={ToHomePage} onKeyDown={ToHomePage} role="button" tabIndex={0} className={classes.a}>
+            LogOut
+          </div>
+        </li>
+      </>
+    );
   }
 
   return (
@@ -115,29 +173,20 @@ const Nav: React.FC = () => {
             About
           </NavLink>
         </li>
-        <li className={classes.li}>
-          <div onClick={onClickSign} role="button" tabIndex={0} onKeyDown={onClickSign} className={classes.a}>
-            Sign In
-          </div>
-        </li>
-        <li className={classes.li}>
-          <div onClick={onClickSignUp} role="button" tabIndex={0} onKeyDown={onClickSignUp} className={classes.a}>
-            Sign Up
-          </div>
-        </li>
+        {menu}
       </ul>
       <Modal signIn={isOpenSignIn}>
-        <form>
+        <form onSubmit={onSubmitLog}>
           <div className={classes.signInWrapper}>
             <div className={classes.authAndBut}>
               <p>Authorization</p>
               <CrossButton onClick={onCloseSign} />
             </div>
             <div className={classes.input}>
-              <InputSign labelName="Login" value={Log} onChange={onChangeLog} />
+              <InputSign labelName="Login" value={logObj.email} name="email" onChange={onChangeLogObj} />
             </div>
             <div className={classes.input}>
-              <InputSign labelName="Password" value={Pass} onChange={onChangePass} />
+              <InputSign labelName="Password" value={logObj.password} name="password" onChange={onChangeLogObj} />
             </div>
             <Submit />
           </div>
@@ -150,27 +199,28 @@ const Nav: React.FC = () => {
               <p>Registation</p>
               <CrossButton onClick={onCloseSignUp} />
             </div>
+            <div className={classes.errorEmail}>{passErrorVal}</div>
             <div className={classes.input}>
-              <InputSign labelName="Login" value={regLog} onChange={onChangeRegLog} />
+              <InputSign labelName="Login" value={regObj.email} name="email" onChange={onChangeRegObj} />
             </div>
             <div className={classes.input}>
-              <InputSign labelName="Password" value={regPass} onChange={onChangeRegPass} />
+              <InputSign labelName="Password" value={regObj.password} name="password" onChange={onChangeRegObj} />
             </div>
             <div
+              className={classes.errorPass}
               style={{
-                opacity: regRepeatPass === regPass ? "0" : "1",
-                display: "flex",
-                justifyContent: "center",
-                position: "absolute",
-                top: "185px",
-                left: "25px",
-                color: "red",
+                opacity: repeatObj.repeatpassword === regObj.password ? "0" : "1",
               }}
             >
               Pass does not match
             </div>
             <div className={classes.input}>
-              <InputSign labelName="Repeat password" value={regRepeatPass} onChange={onChangeRegRepeatPass} />
+              <InputSign
+                labelName="Repeat password"
+                value={repeatObj.repeatpassword}
+                name="repeatpassword"
+                onChange={onChangeRepeatPassObj}
+              />
             </div>
             <Submit />
           </div>
