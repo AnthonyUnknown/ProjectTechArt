@@ -1,0 +1,47 @@
+.signInWrapper {
+  height: 250px;
+  width: 350px;
+  background-color: rgb(58, 56, 56);
+  border-radius: 15px;
+}
+
+.signInWrapperReg {
+  height: 300px;
+  width: 350px;
+  background-color: rgb(58, 56, 56);
+  border-radius: 15px;
+}
+
+.authAndBut {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+.errorPass {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 185px;
+  left: 25px;
+  color: red;
+}
+
+.logBlurError {
+  position: absolute;
+  top: 70px;
+  left: 25px;
+  color: red;
+}
+
+.passBlurError {
+  position: absolute;
+  top: 127px;
+  left: 25px;
+  color: red;
+}

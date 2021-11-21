@@ -43,6 +43,7 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
     "@types/express": "^4.17.13",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
@@ -112,11 +113,16 @@
     "webpack-mock-server": "^1.0.13"
   },
   "dependencies": {
+    "-": "0.0.1",
+    "@types/lodash": "^4.14.177",
+    "async": "^3.2.2",
     "axios": "^0.24.0",
+    "debounce": "^1.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-router": "^6.0.1",
-    "react-router-dom": "^6.0.1"
+    "react-router-dom": "^6.0.1",
+    "react-toastify": "^8.1.0"
   }
 }

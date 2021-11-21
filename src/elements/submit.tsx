@@ -1,6 +1,10 @@
 import classes from "./elementStyles/submit.module.css";
 
-const Submit: React.FC = (props) => (
+interface ISubmit {
+  disabled?: boolean;
+}
+
+const Submit: React.FC<ISubmit> = (props) => (
   <div className={classes.submitBlock}>
     <button {...props} className={classes.submit} type="submit">
       Submit

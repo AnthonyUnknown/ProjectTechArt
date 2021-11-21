@@ -1,21 +1,31 @@
+import { INavHeader } from "@/interfaces";
 import Nav from "./nav";
 import headers from "./headerStyles/header.module.css";
 
-interface IUser {
-  email: string;
-  id: number;
-}
-
-interface IHeader {
-  onReg: (name: string, password: string) => Promise<void>;
-  user: IUser | null;
-  onLog: (name: string, password: string) => Promise<void>;
-}
-
-const Header: React.FC<IHeader> = ({ onReg, user, onLog }) => (
+const Header: React.FC<INavHeader> = ({
+  onReg,
+  user,
+  onLog,
+  isOpenSignIn,
+  onClickSign,
+  onCloseSign,
+  isOpenSignUp,
+  onCloseSignUp,
+  onClickSignUp,
+}) => (
   <header className={headers.header}>
     <div className={headers.pageName}>Games Shop</div>
-    <Nav onReg={onReg} onLog={onLog} user={user} />
+    <Nav
+      onReg={onReg}
+      onLog={onLog}
+      user={user}
+      onClickSign={onClickSign}
+      isOpenSignIn={isOpenSignIn}
+      onCloseSign={onCloseSign}
+      isOpenSignUp={isOpenSignUp}
+      onClickSignUp={onClickSignUp}
+      onCloseSignUp={onCloseSignUp}
+    />
   </header>
 );
 

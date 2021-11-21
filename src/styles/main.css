@@ -15,11 +15,3 @@ body {
   color: red;
   font-size: 30px;
 }
-
-.error-button {
-  margin-top: 50px;
-  background: darkred;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-}

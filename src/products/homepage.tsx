@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import Card from "@/elements/card";
 import { ICard } from "@/interfaces";
 import { useState, useEffect, ChangeEvent } from "react";
+import { debounce } from "lodash";
 import classes from "./productsStyles/homePage.module.css";
 import { apiGetTopCards, apiSearchGames } from "./apiHomePage";
 
@@ -12,7 +13,6 @@ const HomePage: React.FC = () => {
   const [getCards, setGetCards] = useState<ICard[]>([]);
   const [search, setSearch] = useState<string>("");
   const [searchGames, setSearchGames] = useState<ICard[]>([]);
-
   async function searchChanger(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value);
 
@@ -28,6 +28,8 @@ const HomePage: React.FC = () => {
     }
     return null;
   }
+
+  const debounceSearchChanger = debounce(searchChanger, 300);
 
   async function fetchTopCards() {
     try {
@@ -45,7 +47,7 @@ const HomePage: React.FC = () => {
   return (
     <div className={classes.wrapperHomePage}>
       <div className={classes.placeHolderBlock}>
-        <InputBig value={search} placeholder="Search" onChange={searchChanger} />
+        <InputBig value={search} placeholder="Search" onChange={debounceSearchChanger} />
       </div>
       <div className={classes.searchPage}>
         {searchGames.map((searchgame) => (

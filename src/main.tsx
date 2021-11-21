@@ -3,15 +3,8 @@ import "./styles/main.scss";
 // watch: native intellisense and file-peek for aliases from jsconfig.json and with none-js files doesn't work: https://github.com/microsoft/TypeScript/issues/29334
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
+import { AppProps, AppState } from "@/interfaces";
 import Routerr from "./routerr";
-
-interface AppProps {
-  nothing?: boolean;
-}
-
-interface AppState {
-  hasError: boolean;
-}
 
 class AppContainer extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
