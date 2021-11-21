@@ -16,7 +16,8 @@
     "lint-styles": "./node_modules/.bin/stylelint --fix --cache ./**/*.{css,scss,less} && prettier --write **/*.{css,scss,less} --loglevel warn",
     "lint-md": "./node_modules/.bin/markdownlint --fix **/*.md --ignore node_modules",
     "prepare": "husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks && git config --unset core.hooksPath",
-    "postinstall": "npm audit fix"
+    "postinstall": "npm audit fix",
+    "server": "json-server-auth db.json"
   },
   "repository": {
     "type": "git",

@@ -3,13 +3,7 @@ import "./styles/main.scss";
 // watch: native intellisense and file-peek for aliases from jsconfig.json and with none-js files doesn't work: https://github.com/microsoft/TypeScript/issues/29334
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/header/header";
-import HomePage from "./products/homePage";
-import AboutPage from "./products/aboutPage";
-import UserPage from "./users/userPage";
-import Footer from "./products/footer";
-import GameLauncher from "./components/gameLauncher/gameLauncher";
+import Routerr from "./routerr";
 
 interface AppProps {
   nothing?: boolean;
@@ -44,22 +38,9 @@ class AppContainer extends Component<AppProps, AppState> {
     }
     return (
       <StrictMode>
-        <BrowserRouter>
-          <div className="page">
-            <Header />
-          </div>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/userpage" element={<UserPage />} />
-            <Route path="*" element={<HomePage />} />
-            <Route path="/games/:title" element={<GameLauncher />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
+        <Routerr />
       </StrictMode>
     );
   }
 }
-
 ReactDom.render(<AppContainer />, document.getElementById("app"));

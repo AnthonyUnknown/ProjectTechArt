@@ -8,3 +8,13 @@ export interface ICard {
   gameLaunch: Array<string>;
   date: string;
 }
+
+interface IUserUser {
+  email: string;
+  id: number;
+}
+
+export interface IUser {
+  accesToken: string;
+  user: IUserUser;
+}

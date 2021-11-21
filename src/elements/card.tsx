@@ -21,7 +21,7 @@ const Card: React.FC<ICardCard> = ({ card }) => (
           <div className={classes.iconsGames}>
             <div className={classes.iconsGamesFlex}>
               {card.gameLaunch.map((item) => (
-                <div>{platformIconMapping[item]}</div>
+                <div key={Math.random()}>{platformIconMapping[item]}</div>
               ))}
             </div>
           </div>
@@ -34,7 +34,7 @@ const Card: React.FC<ICardCard> = ({ card }) => (
           </div>
           <div className={classes.rating}>
             {card.stars.map(() => (
-              <span key={card.id} className={classes.active} />
+              <span key={Math.random()} className={classes.active} />
             ))}
           </div>
         </div>

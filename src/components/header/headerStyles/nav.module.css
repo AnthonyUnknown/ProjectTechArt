@@ -95,3 +95,26 @@
   margin-bottom: 30px;
   font-size: 20px;
 }
+
+.errorPass {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 185px;
+  left: 25px;
+  color: red;
+}
+
+.errorLength {
+  color: red;
+  position: absolute;
+  top: 60px;
+  left: 25px;
+}
+
+.errorEmail {
+  position: absolute;
+  color: red;
+  top: 60px;
+  left: 25px;
+}
