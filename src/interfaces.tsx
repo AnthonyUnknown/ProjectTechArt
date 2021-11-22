@@ -37,12 +37,17 @@ export interface Ilinks {
 
 export interface INavHeader {
   onReg: (name: string, password: string) => Promise<void>;
-  user: IUserUser | null;
-  onLog: (name: string, password: string) => Promise<void>;
+  user?: IUserUser | null;
+  onLog?: (name: string, password: string) => Promise<void>;
   onClickSign: () => void;
   isOpenSignIn: boolean;
   onCloseSign: () => void;
   isOpenSignUp: boolean;
   onClickSignUp: () => void;
   onCloseSignUp: () => void;
+}
+
+export interface IContext {
+  user: IUserUser | null;
+  onLog: ((name: string, password: string) => Promise<void>) | null;
 }

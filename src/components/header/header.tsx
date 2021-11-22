@@ -4,8 +4,6 @@ import headers from "./headerStyles/header.module.css";
 
 const Header: React.FC<INavHeader> = ({
   onReg,
-  user,
-  onLog,
   isOpenSignIn,
   onClickSign,
   onCloseSign,
@@ -17,8 +15,6 @@ const Header: React.FC<INavHeader> = ({
     <div className={headers.pageName}>Games Shop</div>
     <Nav
       onReg={onReg}
-      onLog={onLog}
-      user={user}
       onClickSign={onClickSign}
       isOpenSignIn={isOpenSignIn}
       onCloseSign={onCloseSign}
