@@ -1,22 +1,18 @@
 import { useNavigate, useLocation } from "react-router-dom";
-
-interface IName {
-  email: string;
-  id: number;
-}
+import useTypedSelector from "@/redux/hookSelector/useTypedSelector";
 
 interface IRoute {
-  name: IName | null;
   onClickSign: () => void;
 }
 
-const ProtectedRoute: React.FC<IRoute> = ({ children, name, onClickSign }) => {
+const ProtectedRoute: React.FC<IRoute> = ({ children, onClickSign }) => {
   const history = useNavigate();
   const location = useLocation();
+  const user = useTypedSelector((stateUser) => stateUser.user.user);
   function onClicker() {
     onClickSign();
     history("/", { state: { from: location.pathname } });
   }
-  return <>{!name ? onClicker() : children}</>;
+  return <>{!user ? onClicker() : children}</>;
 };
 export default ProtectedRoute;

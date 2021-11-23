@@ -1,10 +1,13 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { VscChevronDown } from "react-icons/vsc";
-import { ChangeEvent, SyntheticEvent, useEffect, useState, useContext } from "react";
+import { ChangeEvent, Dispatch, SyntheticEvent, useEffect, useState } from "react";
 import SignIn from "@/elements/signIn";
 import SignUp from "@/elements/signUp";
-import { Ilinks, INavHeader, IContext } from "@/interfaces";
-import ContextProp from "@/context";
+import { Ilinks, INavHeader } from "@/interfaces";
+import useTypedSelector from "@/redux/hookSelector/useTypedSelector";
+import { IAction } from "@/redux/reducers/userLogReducer";
+import { login } from "@/products/apiHomePage";
+import { useDispatch } from "react-redux";
 import classes from "./headerStyles/nav.module.css";
 
 const links: Ilinks = {
@@ -34,7 +37,6 @@ const Nav: React.FC<INavHeader> = ({
   const [logError, setLogError] = useState("Email can not be empty");
   const [passError, setPassError] = useState("Password can not be empty");
   const [formValid, setFormValid] = useState(false);
-  const { user, onLog } = useContext<IContext>(ContextProp);
 
   useEffect(() => {
     if (logError || passError) {
@@ -116,17 +118,30 @@ const Nav: React.FC<INavHeader> = ({
     history("/");
     onCloseSignUp();
   }
-  async function onSubmitLog(e: SyntheticEvent) {
-    let historyPath = "/";
+
+  const user = useTypedSelector((stateUser) => stateUser.user.user);
+  const dispatcher = useDispatch();
+
+  const funcUserLog = () =>
+    async function disp(dispatch: Dispatch<IAction>) {
+      let historyPath = "/";
+      try {
+        const data = await login(logObjEmail, logObjPass);
+        const dataUser = data.user;
+        dispatch({ type: "GET_USER", payload: dataUser });
+        console.log(dataUser);
+      } catch (errorUser) {
+        dispatch({ type: "ERROR_USER", payload: "Ошибка" });
+      }
+      if (state && state.from) {
+        historyPath = state.from;
+      }
+      history(historyPath);
+      onCloseSign();
+    };
+  function onSubmitLog(e: SyntheticEvent) {
     e.preventDefault();
-    if (onLog !== null) {
-      await onLog(logObjEmail, logObjPass);
-    }
-    if (state && state.from) {
-      historyPath = state.from;
-    }
-    history(historyPath);
-    onCloseSign();
+    dispatcher(funcUserLog());
   }
 
   let menu;
