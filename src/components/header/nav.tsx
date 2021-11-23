@@ -1,9 +1,10 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { VscChevronDown } from "react-icons/vsc";
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useEffect, useState, useContext } from "react";
 import SignIn from "@/elements/signIn";
 import SignUp from "@/elements/signUp";
-import { Ilinks, INavHeader } from "@/interfaces";
+import { Ilinks, INavHeader, IContext } from "@/interfaces";
+import ContextProp from "@/context";
 import classes from "./headerStyles/nav.module.css";
 
 const links: Ilinks = {
@@ -16,8 +17,6 @@ const links: Ilinks = {
 
 const Nav: React.FC<INavHeader> = ({
   onReg,
-  user,
-  onLog,
   isOpenSignIn,
   onClickSign,
   onCloseSign,
@@ -35,6 +34,7 @@ const Nav: React.FC<INavHeader> = ({
   const [logError, setLogError] = useState("Email can not be empty");
   const [passError, setPassError] = useState("Password can not be empty");
   const [formValid, setFormValid] = useState(false);
+  const { user, onLog } = useContext<IContext>(ContextProp);
 
   useEffect(() => {
     if (logError || passError) {
@@ -119,7 +119,9 @@ const Nav: React.FC<INavHeader> = ({
   async function onSubmitLog(e: SyntheticEvent) {
     let historyPath = "/";
     e.preventDefault();
-    await onLog(logObjEmail, logObjPass);
+    if (onLog !== null) {
+      await onLog(logObjEmail, logObjPass);
+    }
     if (state && state.from) {
       historyPath = state.from;
     }
