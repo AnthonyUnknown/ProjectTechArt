@@ -86,6 +86,16 @@
       "email": "a@mail.ru",
       "password": "$2a$10$yV4FaA3Isw82xhXulr3/uezMzOgLjGRxSgSHO5y85vYbGddBj0M/W",
       "id": 11
+    },
+    {
+      "email": "qwerty@mail.ru",
+      "password": "$2a$10$QdJKAa3JyktFJD6TLE737O95FvulpdZMpFJVJTDLhfyNUWpi8YPeW",
+      "id": 12
+    },
+    {
+      "email": "a1@mail.ru",
+      "password": "$2a$10$Sr8/QYTL/kBCciBZOdlurO2n60OVMS64W1E/xb7CZoTbOHnXNx.H2",
+      "id": 13
     }
   ]
 }
