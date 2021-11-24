@@ -1,25 +1,17 @@
-import { IUserUser } from "@/interfaces";
-import { ERROR_USER, GET_USER } from "./reducers/userLogReducer";
+import { login } from "@/products/apiHomePage";
+import { Dispatch } from "react";
+import { toast } from "react-toastify";
+import { IAction } from "./reducers/userLogReducer";
 
-interface obj1 {
-  type: string;
-  payload: IUserUser;
-}
-
-interface obj2 {
-  type: string;
-  payload: string;
-}
-
-export type getUser = (payload: IUserUser) => obj1;
-export type getError = (payload: string) => obj2;
-
-export const getUserAction: getUser = (payload: IUserUser): obj1 => ({
-  type: GET_USER,
-  payload,
-});
-
-export const errorUserAction: getError = (payload: string): obj2 => ({
-  type: ERROR_USER,
-  payload,
-});
+const funcUserLog = (logObjEmail: string, logObjPass: string) =>
+  async function disp(dispatch: Dispatch<IAction>): Promise<void> {
+    try {
+      const data = await login(logObjEmail, logObjPass);
+      const dataUser = data.user;
+      dispatch({ type: "GET_USER", payload: dataUser });
+    } catch (errorUser) {
+      dispatch({ type: "ERROR_USER", payload: "Error" });
+      toast("Log Error. Try again!");
+    }
+  };
+export default funcUserLog;

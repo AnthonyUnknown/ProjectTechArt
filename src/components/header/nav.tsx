@@ -1,14 +1,12 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { VscChevronDown } from "react-icons/vsc";
-import { ChangeEvent, Dispatch, SyntheticEvent, useEffect, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import SignIn from "@/elements/signIn";
 import SignUp from "@/elements/signUp";
 import { Ilinks, INavHeader } from "@/interfaces";
 import useTypedSelector from "@/redux/hookSelector/useTypedSelector";
-import { IAction } from "@/redux/reducers/userLogReducer";
-import { login } from "@/products/apiHomePage";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
+import funcUserLog from "@/redux/actionFunctions";
 import classes from "./headerStyles/nav.module.css";
 
 const links: Ilinks = {
@@ -120,32 +118,18 @@ const Nav: React.FC<INavHeader> = ({
     onCloseSignUp();
   }
 
-  const user = useTypedSelector((stateUser) => stateUser.user.user);
-  const userError = useTypedSelector((stateUser) => stateUser.user.error);
   const dispatcher = useDispatch();
+  const user = useTypedSelector((stateUser) => stateUser.user.user);
 
-  const funcUserLog = () =>
-    async function disp(dispatch: Dispatch<IAction>) {
-      let historyPath = "/";
-      try {
-        const data = await login(logObjEmail, logObjPass);
-        const dataUser = data.user;
-        dispatch({ type: "GET_USER", payload: dataUser });
-        console.log(dataUser);
-      } catch (errorUser) {
-        dispatch({ type: "ERROR_USER", payload: "Error" });
-        console.log(userError);
-        toast("Log Error. Try again!");
-      }
-      if (state && state.from) {
-        historyPath = state.from;
-      }
-      history(historyPath);
-      onCloseSign();
-    };
   function onSubmitLog(e: SyntheticEvent) {
     e.preventDefault();
-    dispatcher(funcUserLog());
+    let historyPath = "/";
+    dispatcher(funcUserLog(logObjEmail, logObjPass));
+    if (state && state.from) {
+      historyPath = state.from;
+    }
+    history(historyPath);
+    onCloseSign();
   }
 
   let menu;
