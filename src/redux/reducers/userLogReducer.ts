@@ -1,9 +1,9 @@
 import { IUserUser } from "@/interfaces";
 
-const ERROR_USER = "ERROR_USER";
-const GET_USER = "GET_USER";
+export const ERROR_USER = "ERROR_USER";
+export const GET_USER = "GET_USER";
 
-interface IDefaultState {
+export interface IDefaultState {
   user: IUserUser | null;
   error: string | null;
 }
@@ -13,12 +13,12 @@ const defaultState: IDefaultState = {
   error: null,
 };
 
-interface IGetUserAction {
+export interface IGetUserAction {
   type: typeof GET_USER;
   payload: IUserUser;
 }
 
-interface IErrorUserAction {
+export interface IErrorUserAction {
   type: typeof ERROR_USER;
   payload: string;
 }

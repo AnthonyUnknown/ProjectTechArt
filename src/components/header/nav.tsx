@@ -8,6 +8,7 @@ import useTypedSelector from "@/redux/hookSelector/useTypedSelector";
 import { IAction } from "@/redux/reducers/userLogReducer";
 import { login } from "@/products/apiHomePage";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import classes from "./headerStyles/nav.module.css";
 
 const links: Ilinks = {
@@ -120,6 +121,7 @@ const Nav: React.FC<INavHeader> = ({
   }
 
   const user = useTypedSelector((stateUser) => stateUser.user.user);
+  const userError = useTypedSelector((stateUser) => stateUser.user.error);
   const dispatcher = useDispatch();
 
   const funcUserLog = () =>
@@ -131,7 +133,9 @@ const Nav: React.FC<INavHeader> = ({
         dispatch({ type: "GET_USER", payload: dataUser });
         console.log(dataUser);
       } catch (errorUser) {
-        dispatch({ type: "ERROR_USER", payload: "Ошибка" });
+        dispatch({ type: "ERROR_USER", payload: "Error" });
+        console.log(userError);
+        toast("Log Error. Try again!");
       }
       if (state && state.from) {
         historyPath = state.from;

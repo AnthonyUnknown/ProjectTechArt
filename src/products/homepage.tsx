@@ -13,8 +13,9 @@ const HomePage: React.FC = () => {
   const [getCards, setGetCards] = useState<ICard[]>([]);
   const [search, setSearch] = useState<string>("");
   const [searchGames, setSearchGames] = useState<ICard[]>([]);
-  async function searchChanger(event: ChangeEvent<HTMLInputElement>) {
+  const searchChanger = async (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
+    console.log(event.target.value);
 
     if (event.target.value === "") {
       return setSearchGames([]);
@@ -27,7 +28,7 @@ const HomePage: React.FC = () => {
       alert(e);
     }
     return null;
-  }
+  };
 
   const debounceSearchChanger = debounce(searchChanger, 300);
 
