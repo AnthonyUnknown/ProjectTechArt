@@ -7,8 +7,6 @@ interface InputPropsTypes {
   value: string;
 }
 
-const InputBig: React.FC<InputPropsTypes> = (props) => (
-  <input className={classes.placeholder} {...props} onChange={(e) => props.onChange(e)} />
-);
+const InputBig: React.FC<InputPropsTypes> = (props) => <input className={classes.placeholder} {...props} />;
 
 export default InputBig;

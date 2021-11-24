@@ -12,7 +12,7 @@ interface ISignIn {
   onChangeLogPass: (event: ChangeEvent<HTMLInputElement>) => void;
   isOpenSignIn: boolean;
   onCloseSigned: () => void;
-  onSubmitLog: (e: SyntheticEvent<Element, Event>) => void;
+  onSubmitLog: (e: SyntheticEvent<Element, Event>) => Promise<void>;
 }
 
 const SignIn: React.FC<ISignIn> = ({
@@ -20,8 +20,8 @@ const SignIn: React.FC<ISignIn> = ({
   logObjPass,
   onChangeLogLog,
   onChangeLogPass,
-  onSubmitLog,
   isOpenSignIn,
+  onSubmitLog,
   onCloseSigned,
 }) => (
   <div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import { register } from "@/products/apiHomePage";
+import { register, login } from "@/products/apiHomePage";
 import { ToastContainer, toast } from "react-toastify";
-import { Provider } from "react-redux";
+import { IUserUser } from "@/interfaces";
 import HomePage from "./products/homePage";
 import AboutPage from "./products/aboutPage";
 import UserPage from "./users/userPage";
@@ -11,7 +11,7 @@ import Header from "./components/header/header";
 import Footer from "./products/footer";
 import ProtectedRoute from "./components/protectedRoute";
 import "react-toastify/dist/ReactToastify.css";
-import { store } from "./redux/store";
+import ContextProp from "./context";
 
 const Routerr: React.FC = () => {
   const [isOpenSignIn, setIsOpenSignIn] = useState<boolean>(false);
@@ -31,6 +31,9 @@ const Routerr: React.FC = () => {
   function onCloseSignUp(): void {
     setIsOpenSignUp(false);
   }
+
+  const [user, setUser] = useState<IUserUser | null>(null);
+
   async function onReg(name: string, password: string) {
     try {
       await register(name, password);
@@ -39,8 +42,16 @@ const Routerr: React.FC = () => {
     }
   }
 
+  async function onLog(name: string, password: string) {
+    try {
+      const data = await login(name, password);
+      setUser(data.user);
+    } catch (error) {
+      toast("Error");
+    }
+  }
   return (
-    <Provider store={store}>
+    <ContextProp.Provider value={{ user, onLog }}>
       <div>
         <ToastContainer />
         <BrowserRouter>
@@ -60,7 +71,7 @@ const Routerr: React.FC = () => {
             <Route
               path="/about"
               element={
-                <ProtectedRoute onClickSign={onClickSign}>
+                <ProtectedRoute name={user} onClickSign={onClickSign}>
                   <AboutPage />
                 </ProtectedRoute>
               }
@@ -70,7 +81,7 @@ const Routerr: React.FC = () => {
             <Route
               path="/games/:title"
               element={
-                <ProtectedRoute onClickSign={onClickSign}>
+                <ProtectedRoute name={user} onClickSign={onClickSign}>
                   <GameLauncher />
                 </ProtectedRoute>
               }
@@ -79,7 +90,7 @@ const Routerr: React.FC = () => {
           <Footer />
         </BrowserRouter>
       </div>
-    </Provider>
+    </ContextProp.Provider>
   );
 };
 export default Routerr;

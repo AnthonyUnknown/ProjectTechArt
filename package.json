@@ -90,7 +90,6 @@
     "preload-webpack-plugin": "^3.0.0-beta.4",
     "prettier": "^2.3.2",
     "prettier-eslint": "^12.0.0",
-    "redux-devtools": "^3.7.0",
     "sass-loader": "^12.1.0",
     "script-ext-html-webpack-plugin": "^2.1.5",
     "shx": "^0.3.3",
@@ -122,11 +121,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-    "react-redux": "^7.2.6",
     "react-router": "^6.0.1",
     "react-router-dom": "^6.0.1",
-    "react-toastify": "^8.1.0",
-    "redux": "^4.1.2",
-    "redux-thunk": "^2.4.0"
+    "react-toastify": "^8.1.0"
   }
 }
