@@ -99,17 +99,26 @@ const UserPage: React.FC = () => {
     }
     onCloseChangePass();
   }
-
+  const localStoragePageId = useTypedSelector((stateUser) => stateUser.user.user?.id);
   const dispatcher = useDispatch();
-  const localStorageUserIdd = useTypedSelector((stateUser) => stateUser.user.user?.id);
   function onChangeUserPage(e: SyntheticEvent) {
     e.preventDefault();
-
-    dispatcher(userData(userName, phoneNumber, pic, localStorageUserIdd));
+    dispatcher(userData(userName, phoneNumber, pic, localStoragePageId));
     setUserName("");
     setPhoneNumber("");
     setPic("");
   }
+
+  useEffect(() => {
+    const parseUserPageGet = localStorage.getItem("user");
+    if (parseUserPageGet) {
+      const parseUserPage = JSON.parse(parseUserPageGet);
+      console.log(parseUserPage);
+      dispatcher({ type: "RENAME_USERPAGE", payload: parseUserPage.userName });
+      dispatcher({ type: "REPHONE_USERPAGE", payload: parseUserPage.userPhone });
+      dispatcher({ type: "REPIC_USERPAGE", payload: parseUserPage.userImg });
+    }
+  });
 
   return (
     <div className={classes.userPage}>
@@ -123,7 +132,7 @@ const UserPage: React.FC = () => {
             <div
               className={classes.userPageImg}
               style={{
-                backgroundImage: `${userPagePic}`,
+                backgroundImage: `url(${userPagePic})`,
               }}
             />
             <div className={classes.pic}>

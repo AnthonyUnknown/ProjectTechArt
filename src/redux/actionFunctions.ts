@@ -26,10 +26,15 @@ export const userData = (name: string, phone: string, img: string, id: number | 
   async function disp(dispatch: Dispatch<IActionUserPage>): Promise<void> {
     try {
       const data = await changeData(name, phone, img, id);
-      dispatch({ type: "RENAME_USERPAGE", payload: data.username });
-      dispatch({ type: "REPHONE_USERPAGE", payload: data.phone });
-      dispatch({ type: "REPIC_USERPAGE", payload: data.background });
       localStorage.setItem("user", JSON.stringify(data));
+      const parseUserPageGet = localStorage.getItem("user");
+      if (parseUserPageGet) {
+        const parseUserPage = JSON.parse(parseUserPageGet);
+        console.log(parseUserPage);
+        dispatch({ type: "RENAME_USERPAGE", payload: parseUserPage.userName });
+        dispatch({ type: "REPHONE_USERPAGE", payload: parseUserPage.userPhone });
+        dispatch({ type: "REPIC_USERPAGE", payload: parseUserPage.userImg });
+      }
     } catch (errorUser) {
       dispatch({ type: "ERROR_USERPAGE", payload: "Error" });
       toast("Error. Try again!");
