@@ -56,6 +56,7 @@ const SignUp: React.FC<ISignUp> = ({
               name="email"
               onChange={onChangeRegLog}
               onBlur={onBlurChanger}
+              type="text"
             />
           </div>
           {regObjPassDirty && passError && <div className={classes.passBlurError}>{passError}</div>}
@@ -66,6 +67,7 @@ const SignUp: React.FC<ISignUp> = ({
               name="password"
               onChange={onChangeRegPass}
               onBlur={onBlurChanger}
+              type="password"
             />
           </div>
           <div
@@ -82,9 +84,10 @@ const SignUp: React.FC<ISignUp> = ({
               value={repeatPassObj}
               name="repeatpassword"
               onChange={onChangeRepeatPassObj}
+              type="password"
             />
           </div>
-          <Submit disabled={!formValid} />
+          <Submit disabled={!formValid} buttonname="Submit" />
         </div>
       </form>
     </Modal>

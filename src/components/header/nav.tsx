@@ -4,9 +4,9 @@ import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import SignIn from "@/elements/signIn";
 import SignUp from "@/elements/signUp";
 import { Ilinks, INavHeader } from "@/interfaces";
-import useTypedSelector from "@/redux/hookSelector/useTypedSelector";
 import { useDispatch } from "react-redux";
 import funcUserLog from "@/redux/actionFunctions";
+import useTypedSelector from "@/redux/hookSelector/useTypedSelector";
 import classes from "./headerStyles/nav.module.css";
 
 const links: Ilinks = {
@@ -119,7 +119,6 @@ const Nav: React.FC<INavHeader> = ({
   }
 
   const dispatcher = useDispatch();
-  const user = useTypedSelector((stateUser) => stateUser.user.user);
 
   function onSubmitLog(e: SyntheticEvent) {
     e.preventDefault();
@@ -129,6 +128,8 @@ const Nav: React.FC<INavHeader> = ({
       historyPath = state.from;
     }
     history(historyPath);
+    setLogObjEmail("");
+    setLogObjPass("");
     onCloseSign();
   }
 
@@ -139,24 +140,20 @@ const Nav: React.FC<INavHeader> = ({
   }
   function toHomePage(): void {
     history("/");
+    localStorage.removeItem("user");
+    dispatcher({ type: "GET_USER", payload: null });
+    dispatcher({ type: "USER_STORAGE", payload: null });
   }
 
-  if (user === null) {
-    menu = (
-      <>
-        <li className={classes.li}>
-          <div onClick={onClickSigned} role="button" tabIndex={0} onKeyDown={onClickSigned} className={classes.a}>
-            SignIn
-          </div>
-        </li>
-        <li className={classes.li}>
-          <div onClick={onClickSignedUp} role="button" tabIndex={0} onKeyDown={onClickSignedUp} className={classes.a}>
-            SignUp
-          </div>
-        </li>
-      </>
-    );
-  } else {
+  useEffect(() => {
+    const localStorageSetUser = localStorage.getItem("user");
+    if (localStorageSetUser) {
+      dispatcher({ type: "USER_STORAGE", payload: localStorageSetUser });
+    }
+  });
+  const localStorageUser = useTypedSelector((stateUser) => stateUser.user.userStorage);
+
+  if (localStorageUser) {
     menu = (
       <>
         <li className={classes.li}>
@@ -167,6 +164,21 @@ const Nav: React.FC<INavHeader> = ({
         <li className={classes.li}>
           <div onClick={toHomePage} onKeyDown={toHomePage} role="button" tabIndex={0} className={classes.a}>
             LogOut
+          </div>
+        </li>
+      </>
+    );
+  } else {
+    menu = (
+      <>
+        <li className={classes.li}>
+          <div onClick={onClickSigned} role="button" tabIndex={0} onKeyDown={onClickSigned} className={classes.a}>
+            SignIn
+          </div>
+        </li>
+        <li className={classes.li}>
+          <div onClick={onClickSignedUp} role="button" tabIndex={0} onKeyDown={onClickSignedUp} className={classes.a}>
+            SignUp
           </div>
         </li>
       </>
