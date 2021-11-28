@@ -21,10 +21,13 @@ const UserPage: React.FC = () => {
   const [passError, setPassError] = useState("Password can not be empty");
   const [passRepeatError, setRepeatPassError] = useState("Password can not be empty");
   const [formValid, setFormValid] = useState(false);
-
-  const userPageName = useTypedSelector((stateUserPage) => stateUserPage.userPage.userName);
-  const userPagePhone = useTypedSelector((stateUserPage) => stateUserPage.userPage.userPhone);
-  const userPagePic = useTypedSelector((stateUserPage) => stateUserPage.userPage.userPic);
+  const [validFormUserPage, setValidFormUserPage] = useState({ userName: false, userPhone: false, userPic: false });
+  const [validMessage, setValidMessage] = useState({
+    userName: "",
+    userPhone: "",
+    userPic: "",
+  });
+  const [formValidUserPage, setFormValidUserPage] = useState(false);
 
   useEffect(() => {
     if (passError || passRepeatError) {
@@ -33,6 +36,33 @@ const UserPage: React.FC = () => {
       setFormValid(true);
     }
   }, [passError, passRepeatError]);
+
+  function onBlur(event: React.FocusEvent<HTMLInputElement>) {
+    switch (event.target.name) {
+      case "userName":
+        setValidFormUserPage({ ...validFormUserPage, userName: true });
+        break;
+      case "phoneNumber":
+        setValidFormUserPage({ ...validFormUserPage, userPhone: true });
+        break;
+      case "userPic":
+        setValidFormUserPage({ ...validFormUserPage, userPic: true });
+        break;
+      default:
+    }
+  }
+
+  const userPageName = useTypedSelector((stateUserPage) => stateUserPage.userPage.userName);
+  const userPagePhone = useTypedSelector((stateUserPage) => stateUserPage.userPage.userPhone);
+  const userPagePic = useTypedSelector((stateUserPage) => stateUserPage.userPage.userPic);
+
+  useEffect(() => {
+    if (validMessage.userName || validMessage.userPhone || validMessage.userPic) {
+      setFormValidUserPage(false);
+    } else {
+      setFormValidUserPage(true);
+    }
+  }, [validMessage.userName, validMessage.userPhone, validMessage.userPic]);
 
   function onBlurChanger(event: React.FocusEvent<HTMLInputElement>) {
     switch (event.target.name) {
@@ -56,14 +86,43 @@ const UserPage: React.FC = () => {
 
   function onChangeUserName(e: ChangeEvent<HTMLInputElement>): void {
     setUserName(e.target.value);
+    if (e.target.value.length < 3) {
+      setValidMessage({
+        ...validMessage,
+        userName: "Too short name. Min lenght - 4 letters",
+      });
+      if (!e.target.value) {
+        setValidMessage({
+          ...validMessage,
+          userName: "Warning! If you wanna change your profile page, field Username can not be empty",
+        });
+      }
+    } else {
+      setValidMessage({ ...validMessage, userName: "" });
+    }
   }
-
   function onChangePhoneNumber(e: ChangeEvent<HTMLInputElement>): void {
     setPhoneNumber(e.target.value);
+    if (!e.target.value) {
+      setValidMessage({
+        ...validMessage,
+        userPhone: "Warning! If you wanna change your profile page, field Userphone can not be empty",
+      });
+    } else {
+      setValidMessage({ ...validMessage, userPhone: "" });
+    }
   }
 
   function onChangePic(e: ChangeEvent<HTMLInputElement>): void {
     setPic(e.target.value);
+    if (!e.target.value) {
+      setValidMessage({
+        ...validMessage,
+        userPic: "Warning! If you wanna change your profile page, field User image can not be empty",
+      });
+    } else {
+      setValidMessage({ ...validMessage, userPic: "" });
+    }
   }
 
   function onChangePass(e: ChangeEvent<HTMLInputElement>): void {
@@ -118,7 +177,7 @@ const UserPage: React.FC = () => {
       dispatcher({ type: "REPHONE_USERPAGE", payload: parseUserPage.userPhone });
       dispatcher({ type: "REPIC_USERPAGE", payload: parseUserPage.userImg });
     }
-  });
+  }, []);
 
   return (
     <div className={classes.userPage}>
@@ -142,6 +201,7 @@ const UserPage: React.FC = () => {
                 type="text"
                 name="userPic"
                 onChange={onChangePic}
+                onBlur={onBlur}
               />
             </div>
           </div>
@@ -154,6 +214,7 @@ const UserPage: React.FC = () => {
                 type="text"
                 name="userName"
                 onChange={onChangeUserName}
+                onBlur={onBlur}
               />
             </div>
             <div>{userPagePhone}</div>
@@ -164,35 +225,47 @@ const UserPage: React.FC = () => {
                 type="tel"
                 name="phoneNumber"
                 onChange={onChangePhoneNumber}
+                onBlur={onBlur}
               />
             </div>
           </div>
           <div className={classes.block}>
             <div className={classes.saveButton}>
-              <Submit buttonname="Save Changes" />
+              <Submit disabled={!formValidUserPage} buttonname="Save Changes" />
             </div>
           </div>
         </div>
       </form>
-      <div className={classes.text}>You can change your password here:</div>
-      <div className={classes.changeButton}>
-        <Submit buttonname="Change Password" onClick={onClickChangePass} />
+      {validFormUserPage.userName && validMessage.userName && (
+        <div className={classes.warning}>{validMessage.userName}</div>
+      )}
+      {validFormUserPage.userPhone && validMessage.userPhone && (
+        <div className={classes.warning}>{validMessage.userPhone}</div>
+      )}
+      {validFormUserPage.userPic && validMessage.userPic && (
+        <div className={classes.warning}>{validMessage.userPic}</div>
+      )}
+      <div className={classes.bottomBlock}>
+        <div className={classes.text}>You can change your password here:</div>
+        <div className={classes.changeButton}>
+          <Submit buttonname="Change Password" onClick={onClickChangePass} />
+        </div>
+        <ChangePass
+          changePass={changePass}
+          changeRepeatPass={changeRepeatPass}
+          isOpenChangePass={isOpenChangePass}
+          onChangePass={onChangePass}
+          onChangeRepeatPass={onChangeRepeatPass}
+          onSubmitChangePass={onSubmitChangePass}
+          onCloseChangePass={onCloseChangePass}
+          onBlurChanger={onBlurChanger}
+          passError={passError}
+          changeObjPassDirty={changeObjPassDirty}
+          changeObjRepeatPassDirty={changeObjRepeatPassDirty}
+          passRepeatError={passRepeatError}
+          formValid={formValid}
+        />
       </div>
-      <ChangePass
-        changePass={changePass}
-        changeRepeatPass={changeRepeatPass}
-        isOpenChangePass={isOpenChangePass}
-        onChangePass={onChangePass}
-        onChangeRepeatPass={onChangeRepeatPass}
-        onSubmitChangePass={onSubmitChangePass}
-        onCloseChangePass={onCloseChangePass}
-        onBlurChanger={onBlurChanger}
-        passError={passError}
-        changeObjPassDirty={changeObjPassDirty}
-        changeObjRepeatPassDirty={changeObjRepeatPassDirty}
-        passRepeatError={passRepeatError}
-        formValid={formValid}
-      />
     </div>
   );
 };
