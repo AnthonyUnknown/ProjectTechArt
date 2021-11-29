@@ -5,8 +5,8 @@ import ChangePass from "@/elements/changePass";
 import useTypedSelector from "@/redux/hookSelector/useTypedSelector";
 import { changePassUserApi } from "@/products/apiHomePage";
 import { useDispatch } from "react-redux";
-import { userData } from "@/redux/actionFunctions";
 import { toast } from "react-toastify";
+import { userData } from "@/redux/actionFunctions";
 import classes from "./userPage.module.css";
 
 const UserPage: React.FC = () => {
@@ -51,10 +51,6 @@ const UserPage: React.FC = () => {
       default:
     }
   }
-
-  const userPageName = useTypedSelector((stateUserPage) => stateUserPage.userPage.userName);
-  const userPagePhone = useTypedSelector((stateUserPage) => stateUserPage.userPage.userPhone);
-  const userPagePic = useTypedSelector((stateUserPage) => stateUserPage.userPage.userPic);
 
   useEffect(() => {
     if (validMessage.userName || validMessage.userPhone || validMessage.userPic) {
@@ -158,6 +154,7 @@ const UserPage: React.FC = () => {
     }
     onCloseChangePass();
   }
+  const getUser = useTypedSelector((stateUser) => stateUser.user.user);
   const localStoragePageId = useTypedSelector((stateUser) => stateUser.user.user?.id);
   const dispatcher = useDispatch();
   function onChangeUserPage(e: SyntheticEvent) {
@@ -168,21 +165,10 @@ const UserPage: React.FC = () => {
     setPic("");
   }
 
-  useEffect(() => {
-    const parseUserPageGet = localStorage.getItem("user");
-    if (parseUserPageGet) {
-      const parseUserPage = JSON.parse(parseUserPageGet);
-      console.log(parseUserPage);
-      dispatcher({ type: "RENAME_USERPAGE", payload: parseUserPage.userName });
-      dispatcher({ type: "REPHONE_USERPAGE", payload: parseUserPage.userPhone });
-      dispatcher({ type: "REPIC_USERPAGE", payload: parseUserPage.userImg });
-    }
-  }, []);
-
   return (
     <div className={classes.userPage}>
       <div className={classes.userPageName}>
-        <span>UserName Home Page</span>
+        <span>{getUser?.userName} Home Page</span>
       </div>
       <hr />
       <form onSubmit={onChangeUserPage}>
@@ -191,7 +177,7 @@ const UserPage: React.FC = () => {
             <div
               className={classes.userPageImg}
               style={{
-                backgroundImage: `url(${userPagePic})`,
+                backgroundImage: `url(${getUser?.userImg})`,
               }}
             />
             <div className={classes.pic}>
@@ -206,7 +192,7 @@ const UserPage: React.FC = () => {
             </div>
           </div>
           <div className={classes.block}>
-            <div>{userPageName}</div>
+            <div>{getUser?.userName}</div>
             <div>
               <InputSign
                 labelname="Change your name:"
@@ -217,7 +203,7 @@ const UserPage: React.FC = () => {
                 onBlur={onBlur}
               />
             </div>
-            <div>{userPagePhone}</div>
+            <div>{getUser?.userPhone}</div>
             <div>
               <InputSign
                 labelname="Change your phone number:"

@@ -12,6 +12,9 @@ export interface ICard {
 export interface IUserUser {
   email: string;
   id: number;
+  userName?: string;
+  userPhone?: string;
+  userImg?: string;
 }
 
 export interface IUser {

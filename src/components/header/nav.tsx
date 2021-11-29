@@ -148,17 +148,18 @@ const Nav: React.FC<INavHeader> = ({
   useEffect(() => {
     const localStorageSetUser = localStorage.getItem("user");
     if (localStorageSetUser) {
-      dispatcher({ type: "USER_STORAGE", payload: localStorageSetUser });
+      const parseUser = JSON.parse(localStorageSetUser);
+      dispatcher({ type: "GET_USER", payload: parseUser });
     }
-  });
-  const localStorageUser = useTypedSelector((stateUser) => stateUser.user.userStorage);
+  }, []);
+  const localStorageUser = useTypedSelector((stateUser) => stateUser.user.user);
 
   if (localStorageUser) {
     menu = (
       <>
         <li className={classes.li}>
           <div onClick={toUserPage} onKeyDown={toUserPage} role="button" tabIndex={0} className={classes.a}>
-            UserName
+            {localStorageUser.userName}
           </div>
         </li>
         <li className={classes.li}>
