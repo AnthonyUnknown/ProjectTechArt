@@ -1,0 +1,10 @@
+.genresRadio {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.genresRadioBtn {
+  width: 20px;
+  height: 20px;
+}

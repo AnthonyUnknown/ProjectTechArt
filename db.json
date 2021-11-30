@@ -3,56 +3,86 @@
     {
       "id": 0,
       "game": "CS:GO",
-      "price": "10$",
+      "price": "10",
       "background": "https://winternode.com/games/csgo.jpg",
       "text": "CS:GO is a team tactical first-person shooter, a kind of remake of the original modification for Half-Life. The game offers everyone who wants to fight teams of terrorists and special forces on a variety of unique maps.",
-      "stars": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
-      "gameLaunch": [
-        "pc"
-      ],
-      "date": "2021-11-14"
+      "stars": ["1", "2", "3", "4", "5"],
+      "gameLaunch": ["pc"],
+      "date": "2021-11-14",
+      "genre": ["all", "shooter"],
+      "age": ["all", "twelve"]
     },
     {
       "id": 1,
       "game": "Grand Theft Auto V",
-      "price": "20$",
+      "price": "20",
       "background": "https://m.media-amazon.com/images/I/91T0XQv8gEL._SL1500_.jpg",
       "text": "Grand Theft Auto V (aka GTA 5 or GTA V) is the fifteenth game in the Grand Theft Auto series, made in the Action / Sandbox genre. For the first time in the history of the series, there are three main characters in the game at once, between whom you can switch almost at any time.",
-      "stars": [
-        "1",
-        "2",
-        "3",
-        "4"
-      ],
-      "gameLaunch": [
-        "pc",
-        "playstation",
-        "xbox"
-      ],
-      "date": "2021-11-14"
+      "stars": ["1", "2", "3", "4"],
+      "gameLaunch": ["pc", "playstation", "xbox"],
+      "date": "2021-11-14",
+      "genre": ["all", "arcade"],
+      "age": ["all", "eighteen"]
     },
     {
       "id": 2,
       "game": "Borderlands 3",
-      "price": "59,99$",
+      "price": "59,99",
       "background": "https://image.api.playstation.com/vulcan/ap/rnd/202010/1720/uUTyRJprtjAyp46TonVTWBws.png",
       "text": "Borderlands 3 is an insane shooter triquel with RPG elements in the spirit of Diablo. The game tells the story of a new four of the Asylum Seekers who confront two twin villains who decided to unite the bandit clans and lay their hands on certain forces that affect the whole world.",
-      "stars": [
-        "1",
-        "2",
-        "3"
-      ],
-      "gameLaunch": [
-        "pc",
-        "playstation"
-      ],
-      "date": "2021-11-14"
+      "stars": ["1", "2", "3"],
+      "gameLaunch": ["pc", "playstation"],
+      "date": "2021-11-14",
+      "genre": ["all", "shooter"],
+      "age": ["all", "eighteen"]
+    },
+    {
+      "id": 3,
+      "game": "Minecraft",
+      "price": "5",
+      "background": "https://img.poki.com/cdn-cgi/image/quality=78,width=600,height=600,fit=cover,g=0.5x0.5,f=auto/12a0ed7c6bc09b73d6558c6f69ed7f5f.png",
+      "text": "Minecraft is a 3D sandbox game that has no required goals to accomplish, allowing players a large amount of freedom in choosing how to play the game.",
+      "stars": ["1", "2", "3", "4"],
+      "gameLaunch": ["pc", "playstation", "xbox"],
+      "date": "2021-11-29",
+      "genre": ["all", "survive"],
+      "age": ["all", "six"]
+    },
+    {
+      "id": 4,
+      "game": "Dota 2",
+      "price": "10",
+      "background": "https://upload.wikimedia.org/wikipedia/ru/8/8e/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_Dota_2.jpg",
+      "text": "Dota 2 is a multiplayer online battle arena (MOBA) video game developed and published by Valve. The game is a sequel to Defense of the Ancients (DotA), which was a community-created mod for Blizzard Entertainment's Warcraft III: Reign of Chaos.",
+      "stars": ["1", "2", "3", "4", "5"],
+      "gameLaunch": ["pc"],
+      "date": "2021-11-29",
+      "genre": ["all", "arcade"],
+      "age": ["all", "six"]
+    },
+    {
+      "id": 5,
+      "game": "Onigiri",
+      "price": "100",
+      "background": "https://upload.wikimedia.org/wikipedia/en/7/79/Onigiri_EU_cover.jpg",
+      "text": "With ancient Japan as its setting and the heroes of history and folklore as its cast, Onigiri thrusts its players into a story revolving around the myths of Japan!",
+      "stars": ["1", "2", "3", "4", "5"],
+      "gameLaunch": ["xbox"],
+      "date": "2021-11-29",
+      "genre": ["all", "survive"],
+      "age": ["all", "twelve"]
+    },
+    {
+      "id": 6,
+      "game": "The Last of Us Part II",
+      "price": "50",
+      "background": "https://image.api.playstation.com/vulcan/img/rnd/202010/2618/w48z6bzefZPrRcJHc7L8SO66.png",
+      "text": "The Last of Us Part II is an action-adventure game played from a third-person perspective featuring elements of the survival horror genre. The player traverses post-apocalyptic environments such as buildings and forests to advance the story.",
+      "stars": ["1", "2", "3", "4", "5"],
+      "gameLaunch": ["xbox"],
+      "date": "2021-11-29",
+      "genre": ["all", "survive"],
+      "age": ["all", "eighteen"]
     }
   ],
   "users": [

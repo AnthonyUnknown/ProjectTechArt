@@ -1,0 +1,104 @@
+.gameLaunchWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url("https://images.wallpaperscraft.ru/image/single/ulitsa_nochnoj_gorod_neon_187651_3840x2160.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.placeHolderBlock {
+  margin-top: 100px;
+}
+
+.searcher {
+  width: 500px;
+  background: lightgray;
+  color: black;
+  font-size: 14px;
+  border: 1px solid purple;
+  cursor: pointer;
+}
+
+.searchPage {
+  height: 20px;
+}
+
+.bottomBlockGL {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 100px;
+  color: black;
+  margin-bottom: 100px;
+}
+
+.GamesBlock {
+  width: 60%;
+  background: rgb(214, 211, 211);
+  margin-top: 30px;
+  opacity: 0.85;
+  border-radius: 15px;
+}
+
+.games {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.title {
+  margin-left: 10px;
+  margin-right: 10px;
+  color: black;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 15%;
+  opacity: 0.85;
+  background: rgb(214, 211, 211);
+  margin-right: 30px;
+  border-radius: 15px;
+  height: 550px;
+}
+
+.titleGL {
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+.hr {
+  width: 90%;
+}
+
+.selectNameBlock {
+  display: flex;
+}
+
+.selectNameBlockLabel {
+  margin-right: 70px;
+  font-size: 20px;
+}
+
+.selectTypeBlockLabel {
+  margin-right: 95px;
+  font-size: 20px;
+}
+
+.selectNameBlockSelect {
+  width: 140px;
+  font-size: 20px;
+  background: lightgray;
+}
+
+.selectTypeBlock {
+  display: flex;
+  margin-top: 20px;
+}
