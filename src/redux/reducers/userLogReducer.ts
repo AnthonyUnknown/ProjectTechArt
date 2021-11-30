@@ -2,15 +2,18 @@ import { IUserUser } from "@/interfaces";
 
 export const ERROR_USER = "ERROR_USER";
 export const GET_USER = "GET_USER";
+export const USER_STORAGE = "USER_STORAGE";
 
 export interface IDefaultState {
   user: IUserUser | null;
   error: string | null;
+  userStorage: string | null;
 }
 
 const defaultState: IDefaultState = {
   user: null,
   error: null,
+  userStorage: null,
 };
 
 export interface IGetUserAction {
@@ -23,14 +26,21 @@ export interface IErrorUserAction {
   payload: string;
 }
 
-export type IAction = IGetUserAction | IErrorUserAction;
+export interface IUserStorageAction {
+  type: typeof USER_STORAGE;
+  payload: string;
+}
+
+export type IAction = IGetUserAction | IErrorUserAction | IUserStorageAction;
 
 const userLogReducer = (stateUser = defaultState, action: IAction): IDefaultState => {
   switch (action.type) {
     case GET_USER:
-      return { user: action.payload, error: null };
+      return { ...stateUser, user: action.payload, error: null };
+    case USER_STORAGE:
+      return { ...stateUser, userStorage: action.payload };
     case ERROR_USER:
-      return { user: null, error: action.payload };
+      return { ...stateUser, user: null, error: action.payload };
     default:
       return stateUser;
   }

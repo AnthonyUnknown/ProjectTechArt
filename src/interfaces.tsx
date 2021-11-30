@@ -12,6 +12,9 @@ export interface ICard {
 export interface IUserUser {
   email: string;
   id: number;
+  userName?: string;
+  userPhone?: string;
+  userImg?: string;
 }
 
 export interface IUser {
@@ -50,4 +53,15 @@ export interface INavHeader {
 export interface IContext {
   user: IUserUser | null;
   onLog: ((name: string, password: string) => Promise<void>) | null;
+}
+
+export interface IChangePass {
+  password: string;
+  id: number | undefined;
+}
+
+export interface IData {
+  username: string;
+  phone: string;
+  background: string;
 }

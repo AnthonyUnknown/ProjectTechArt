@@ -4,7 +4,9 @@ import "./styles/main.scss";
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
 import { AppProps, AppState } from "@/interfaces";
+import { Provider } from "react-redux";
 import Routerr from "./routerr";
+import { store } from "./redux/store";
 
 class AppContainer extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
@@ -31,7 +33,9 @@ class AppContainer extends Component<AppProps, AppState> {
     }
     return (
       <StrictMode>
-        <Routerr />
+        <Provider store={store}>
+          <Routerr />
+        </Provider>
       </StrictMode>
     );
   }

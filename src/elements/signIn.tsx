@@ -33,12 +33,18 @@ const SignIn: React.FC<ISignIn> = ({
             <CrossButton onClick={onCloseSigned} />
           </div>
           <div className={classes.input}>
-            <InputSign labelname="Login" value={logObjEmail} name="email" onChange={onChangeLogLog} />
+            <InputSign labelname="Login" value={logObjEmail} name="email" type="text" onChange={onChangeLogLog} />
           </div>
           <div className={classes.input}>
-            <InputSign labelname="Password" value={logObjPass} name="password" onChange={onChangeLogPass} />
+            <InputSign
+              labelname="Password"
+              value={logObjPass}
+              type="password"
+              name="password"
+              onChange={onChangeLogPass}
+            />
           </div>
-          <Submit />
+          <Submit buttonname="Submit" />
         </div>
       </form>
     </Modal>

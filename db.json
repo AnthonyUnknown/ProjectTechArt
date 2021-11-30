@@ -6,8 +6,16 @@
       "price": "10$",
       "background": "https://winternode.com/games/csgo.jpg",
       "text": "CS:GO is a team tactical first-person shooter, a kind of remake of the original modification for Half-Life. The game offers everyone who wants to fight teams of terrorists and special forces on a variety of unique maps.",
-      "stars": ["1", "2", "3", "4", "5"],
-      "gameLaunch": ["pc"],
+      "stars": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "gameLaunch": [
+        "pc"
+      ],
       "date": "2021-11-14"
     },
     {
@@ -16,8 +24,17 @@
       "price": "20$",
       "background": "https://m.media-amazon.com/images/I/91T0XQv8gEL._SL1500_.jpg",
       "text": "Grand Theft Auto V (aka GTA 5 or GTA V) is the fifteenth game in the Grand Theft Auto series, made in the Action / Sandbox genre. For the first time in the history of the series, there are three main characters in the game at once, between whom you can switch almost at any time.",
-      "stars": ["1", "2", "3", "4"],
-      "gameLaunch": ["pc", "playstation", "xbox"],
+      "stars": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "gameLaunch": [
+        "pc",
+        "playstation",
+        "xbox"
+      ],
       "date": "2021-11-14"
     },
     {
@@ -26,8 +43,15 @@
       "price": "59,99$",
       "background": "https://image.api.playstation.com/vulcan/ap/rnd/202010/1720/uUTyRJprtjAyp46TonVTWBws.png",
       "text": "Borderlands 3 is an insane shooter triquel with RPG elements in the spirit of Diablo. The game tells the story of a new four of the Asylum Seekers who confront two twin villains who decided to unite the bandit clans and lay their hands on certain forces that affect the whole world.",
-      "stars": ["1", "2", "3"],
-      "gameLaunch": ["pc", "playstation"],
+      "stars": [
+        "1",
+        "2",
+        "3"
+      ],
+      "gameLaunch": [
+        "pc",
+        "playstation"
+      ],
       "date": "2021-11-14"
     }
   ],
@@ -96,6 +120,43 @@
       "email": "a1@mail.ru",
       "password": "$2a$10$Sr8/QYTL/kBCciBZOdlurO2n60OVMS64W1E/xb7CZoTbOHnXNx.H2",
       "id": 13
+    },
+    {
+      "email": "ab@mail.ru",
+      "password": "$2a$10$T/nOfxIjF8jJtiSxCSmnbOFoOtJrEq/oBrSpLtQZ86X4/8Wxmcvcq",
+      "id": 14
+    },
+    {
+      "email": "test@mail.ru",
+      "password": "$2a$10$Q/FZNeXRk6N8nS8XeSsPFehvKH3ercQNdX0P2cPpGfclDAVczUNIC",
+      "name": "username",
+      "phone": "phone",
+      "img": "img",
+      "id": 15
+    },
+    {
+      "email": "test22@mail.ru",
+      "password": "$2a$10$clLrUngfwbHqLRwv2P3.8uqskLUJ8k1/M2yd6vAlrXdua8yFNxY5m",
+      "name": "UserName",
+      "phone": "phone",
+      "img": "pic",
+      "id": 16
+    },
+    {
+      "email": "tester@mail.ru",
+      "password": "$2a$10$5/gw0luDGdvSfr2ENk.//uZe/4tJecUQ7F3oeY8wegRnFOpYBWMCO",
+      "userName": "Anton1",
+      "userPhone": "+375336292905",
+      "userImg": "https://www.iphones.ru/wp-content/uploads/2021/09/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0-2021-09-07-%D0%B2-19.48.05.jpg",
+      "id": 17
+    },
+    {
+      "email": "testernew@mail.ru",
+      "password": "$2a$10$4TB5nIs0.P5y.3k7TcU1q.w0bS.cnp6BrfhZZjMRSTbKsl4lEnYNG",
+      "userName": "Default",
+      "userPhone": "Default",
+      "userImg": "Default",
+      "id": 18
     }
   ]
 }
