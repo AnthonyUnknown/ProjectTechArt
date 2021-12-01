@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useParams } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
 import { ICard } from "@/interfaces";
@@ -5,11 +6,8 @@ import { toast } from "react-toastify";
 import Card from "@/elements/card";
 import InputBig from "@/elements/inputBig";
 import { apiGamesTypes, apiSearchGames } from "@/products/apiHomePage";
-import { debounce } from "lodash";
 import RadioBtn from "@/elements/radioBtn";
-import RadioBtnAge from "@/elements/radioBtnAge";
 import classes from "./gameLauncherStyles/gameLauncher.module.css";
-/* eslint-disable jsx-a11y/label-has-associated-control */
 
 const GameLauncher: React.FC = () => {
   const { title } = useParams();
@@ -49,8 +47,6 @@ const GameLauncher: React.FC = () => {
     return null;
   };
 
-  const debounceSearchChanger = debounce(searchChanger, 300);
-
   async function fetchCards() {
     try {
       const data = await apiGamesTypes(newTitle, criteriaState, typeState, genresBtn, agesBtn);
@@ -74,7 +70,7 @@ const GameLauncher: React.FC = () => {
   return (
     <div className={classes.gameLaunchWrapper}>
       <div className={classes.placeHolderBlock}>
-        <InputBig value={search} placeholder="Search" onChange={debounceSearchChanger} />
+        <InputBig value={search} placeholder="Search" onChange={searchChanger} />
       </div>
       <div className={classes.searchPage}>
         {searchGames.map((searchgame) => (
@@ -162,7 +158,7 @@ const GameLauncher: React.FC = () => {
           <div className={classes.titleGL}>Age</div>
           <hr className={classes.hr} />
           <div className={classes.ageRadioBtns}>
-            <RadioBtnAge
+            <RadioBtn
               type="radio"
               id="radioAge"
               name="radio-btn-age"
@@ -171,7 +167,7 @@ const GameLauncher: React.FC = () => {
               checked={isRadioSelectedAge("all")}
               onChange={onChangeAge}
             />
-            <RadioBtnAge
+            <RadioBtn
               type="radio"
               id="radioAge"
               name="radio-btn-age"
@@ -180,7 +176,7 @@ const GameLauncher: React.FC = () => {
               checked={isRadioSelectedAge("six")}
               onChange={onChangeAge}
             />
-            <RadioBtnAge
+            <RadioBtn
               type="radio"
               id="radioAge"
               name="radio-btn-age"
@@ -189,7 +185,7 @@ const GameLauncher: React.FC = () => {
               checked={isRadioSelectedAge("twelve")}
               onChange={onChangeAge}
             />
-            <RadioBtnAge
+            <RadioBtn
               type="radio"
               id="radioAge"
               name="radio-btn-age"

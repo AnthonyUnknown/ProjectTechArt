@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import Card from "@/elements/card";
 import { ICard } from "@/interfaces";
 import { useState, useEffect, ChangeEvent } from "react";
-import { debounce } from "lodash";
 import { toast } from "react-toastify";
 import classes from "./productsStyles/homePage.module.css";
 import { apiGetTopCards, apiSearchGames } from "./apiHomePage";
@@ -30,8 +29,6 @@ const HomePage: React.FC = () => {
     return null;
   };
 
-  const debounceSearchChanger = debounce(searchChanger, 300);
-
   async function fetchTopCards() {
     try {
       const data = await apiGetTopCards();
@@ -48,7 +45,7 @@ const HomePage: React.FC = () => {
   return (
     <div className={classes.wrapperHomePage}>
       <div className={classes.placeHolderBlock}>
-        <InputBig value={search} placeholder="Search" onChange={debounceSearchChanger} />
+        <InputBig value={search} placeholder="Search" onChange={searchChanger} />
       </div>
       <div className={classes.searchPage}>
         {searchGames.map((searchgame) => (
