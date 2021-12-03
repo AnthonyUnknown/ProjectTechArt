@@ -1,7 +1,7 @@
 import "./styles/main.css";
 import "./styles/main.scss";
 // watch: native intellisense and file-peek for aliases from jsconfig.json and with none-js files doesn't work: https://github.com/microsoft/TypeScript/issues/29334
-import { Component, StrictMode } from "react";
+import { Component, StrictMode, Suspense } from "react";
 import ReactDom from "react-dom";
 import { AppProps, AppState } from "@/interfaces";
 import { Provider } from "react-redux";
@@ -40,4 +40,15 @@ class AppContainer extends Component<AppProps, AppState> {
     );
   }
 }
-ReactDom.render(<AppContainer />, document.getElementById("app"));
+ReactDom.render(
+  <Suspense
+    fallback={
+      <div style={{ color: "red", fontSize: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        Loading...
+      </div>
+    }
+  >
+    <AppContainer />
+  </Suspense>,
+  document.getElementById("app")
+);

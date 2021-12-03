@@ -7,6 +7,8 @@ export interface ICard {
   stars: Array<string>;
   gameLaunch: Array<string>;
   date: string;
+  genre: Array<string>;
+  age: Array<string>;
 }
 
 export interface IUserUser {

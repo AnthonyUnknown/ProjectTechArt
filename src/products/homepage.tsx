@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import Card from "@/elements/card";
 import { ICard } from "@/interfaces";
 import { useState, useEffect, ChangeEvent } from "react";
-import { debounce } from "lodash";
+import { toast } from "react-toastify";
 import classes from "./productsStyles/homePage.module.css";
 import { apiGetTopCards, apiSearchGames } from "./apiHomePage";
 
@@ -15,7 +15,6 @@ const HomePage: React.FC = () => {
   const [searchGames, setSearchGames] = useState<ICard[]>([]);
   const searchChanger = async (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
-    console.log(event.target.value);
 
     if (event.target.value === "") {
       return setSearchGames([]);
@@ -25,19 +24,17 @@ const HomePage: React.FC = () => {
       setSearchGames(data);
       return null;
     } catch (e) {
-      alert(e);
+      toast("Error");
     }
     return null;
   };
-
-  const debounceSearchChanger = debounce(searchChanger, 300);
 
   async function fetchTopCards() {
     try {
       const data = await apiGetTopCards();
       setGetCards(data);
     } catch (e) {
-      alert(e);
+      toast("Error");
     }
   }
 
@@ -48,7 +45,7 @@ const HomePage: React.FC = () => {
   return (
     <div className={classes.wrapperHomePage}>
       <div className={classes.placeHolderBlock}>
-        <InputBig value={search} placeholder="Search" onChange={debounceSearchChanger} />
+        <InputBig value={search} placeholder="Search" onChange={searchChanger} />
       </div>
       <div className={classes.searchPage}>
         {searchGames.map((searchgame) => (
@@ -67,15 +64,15 @@ const HomePage: React.FC = () => {
       <div className={classes.categories}>
         <p className={classes.categoriesName}>Categories</p>
         <div className={classes.gameIcons}>
-          <NavLink className={classes.iconBlock} to="/games/:pc">
+          <NavLink className={classes.iconBlock} to="/games/pc">
             <AiFillWindows className={classes.icon} />
             <p style={{ fontWeight: "bold" }}>PC</p>
           </NavLink>
-          <NavLink className={classes.iconBlock} to="/games/:playstation">
+          <NavLink className={classes.iconBlock} to="/games/playstation">
             <FaPlaystation className={classes.icon} />
             <p style={{ fontWeight: "bold" }}>Playstation 5</p>
           </NavLink>
-          <NavLink className={classes.iconBlock} to="/games/:xbox">
+          <NavLink className={classes.iconBlock} to="/games/xbox">
             <FaXbox className={classes.icon} />
             <p style={{ fontWeight: "bold" }}>XBox One</p>
           </NavLink>
@@ -85,7 +82,7 @@ const HomePage: React.FC = () => {
         <p className={classes.title}>New Games</p>
         <div className={classes.threeTopGames}>
           {getCards.map((card) => (
-            <Card card={card} key={Math.random()} />
+            <Card card={card} key={card.id} />
           ))}
         </div>
       </div>

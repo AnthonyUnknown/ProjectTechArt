@@ -12,6 +12,19 @@ export async function apiSearchGames(value: string): Promise<ICard[]> {
   return resp.data;
 }
 
+export async function apiGamesTypes(
+  newTitle: string | undefined,
+  criteriaState: string,
+  typeState: string,
+  genresBtn: string,
+  agesBtn: string
+): Promise<ICard[]> {
+  const response = await axios.get<ICard[]>(
+    `http://localhost:3000/cards?gameLaunch_like=${newTitle}&_sort=${criteriaState}&_order=${typeState}&genre_like=${genresBtn}&age_like=${agesBtn}`
+  );
+  return response.data;
+}
+
 export async function register(mail: string, pass: string): Promise<IUser> {
   const resp = await axios.post(`${endpoints.registerApi}`, {
     email: mail,

@@ -30,7 +30,7 @@ const Card: React.FC<ICardCard> = ({ card }) => (
         <div className={classes.bottomCard}>
           <div className={classes.priceAndName}>
             <span>{card.game}</span>
-            <span className={classes.price}>{card.price}</span>
+            <span className={classes.price}>{card.price}$</span>
           </div>
           <div className={classes.rating}>
             {card.stars.map(() => (
