@@ -2,28 +2,33 @@
 import { ChangeEvent } from "react";
 import classes from "./elementStyles/radioBtn.module.css";
 
-interface IRadioBtn {
+interface IRadioBtnCard {
+  idNumber?: number;
   type: string;
   id: string;
   name: string;
   value: string;
   labelname: string;
-  checked: boolean;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const RadioBtn: React.FC<IRadioBtn> = ({ type, id, name, value, labelname, checked, onChange }) => (
+interface IRadioBtn {
+  radioBtn: IRadioBtnCard;
+  checked?: boolean;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const RadioBtn: React.FC<IRadioBtn> = ({ radioBtn, onChange, checked }) => (
   <div className={classes.genresRadio}>
     <input
       className={classes.genresRadioBtn}
-      type={type}
-      id={id}
-      name={name}
-      value={value}
+      type={radioBtn.type}
+      id={radioBtn.id}
+      name={radioBtn.name}
+      value={radioBtn.value}
       onChange={onChange}
       checked={checked}
     />
-    <label htmlFor="radio">{labelname}</label>
+    <label htmlFor="radio">{radioBtn.labelname}</label>
   </div>
 );
 

@@ -160,10 +160,17 @@ const UserPage: React.FC = () => {
   function onChangeUserPage(e: SyntheticEvent) {
     e.preventDefault();
     dispatcher(userData(userName, phoneNumber, pic, localStoragePageId));
-    setUserName("");
-    setPhoneNumber("");
-    setPic("");
   }
+
+  useEffect(() => {
+    const localStorageSetUser = localStorage.getItem("user");
+    if (localStorageSetUser) {
+      const parseUser = JSON.parse(localStorageSetUser);
+      setUserName(parseUser.userName);
+      setPhoneNumber(parseUser.userPhone);
+      setPic(parseUser.userImg);
+    }
+  }, []);
 
   return (
     <div className={classes.userPage}>

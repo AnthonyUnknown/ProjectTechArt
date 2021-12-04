@@ -15,3 +15,14 @@ body {
   color: red;
   font-size: 30px;
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loaderRi {
+  width: 50vw;
+  height: 100vh;
+}

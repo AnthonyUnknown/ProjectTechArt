@@ -1,8 +1,12 @@
 .card {
-  display: flex;
-  justify-content: center;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.cardWrapper {
+  width: 33%;
+  display: flex;
+  justify-content: center;
 }
 
 .cardPlace {
