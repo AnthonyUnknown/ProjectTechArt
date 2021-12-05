@@ -12,8 +12,12 @@ interface IInput {
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const InputSign: React.FC<IInput> = (props) => (
   <div className={classes.inputAndLabel}>
-    <label htmlFor="name">{props.labelname}</label>
-    <input {...props} className={classes.inputSign} id="name" />
+    <div>
+      <label htmlFor="name">{props.labelname}</label>
+    </div>
+    <div>
+      <input {...props} className={classes.inputSign} id="name" />
+    </div>
   </div>
 );
 

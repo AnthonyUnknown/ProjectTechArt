@@ -108,3 +108,12 @@
   width: 10em;
   height: 10em;
 }
+
+.addNewCard {
+  background: purple;
+  color: white;
+  width: 90px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}

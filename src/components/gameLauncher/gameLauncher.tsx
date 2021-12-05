@@ -8,6 +8,7 @@ import Card from "@/elements/card";
 import InputBig from "@/elements/inputBig";
 import { apiGamesTypes, apiSearchGames } from "@/products/apiHomePage";
 import RadioBtn from "@/elements/radioBtn";
+import ModalAdd from "@/elements/modalAdd";
 import classes from "./gameLauncherStyles/gameLauncher.module.css";
 
 interface IRadioBtn {
@@ -30,6 +31,15 @@ const GameLauncher: React.FC = () => {
   const [genresBtn, setGenresBtn] = useState("all");
   const [agesBtn, setAgesBtn] = useState("all");
   const [loader, setLoader] = useState(true);
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
+
+  function openAdd() {
+    setIsOpenAdd(true);
+  }
+
+  function closeAdd() {
+    setIsOpenAdd(false);
+  }
 
   const radioBtnsGenres: Array<IRadioBtn> = [
     { idNumber: 1, id: "radio", type: "radio", name: "radio-btn", value: "all", labelname: "All genres" },
@@ -94,6 +104,21 @@ const GameLauncher: React.FC = () => {
   useEffect(() => {
     fetchCards();
   }, [newTitle, criteriaState, typeState, genresBtn, agesBtn]);
+
+  const localStorageAdmin = localStorage.getItem("admin");
+  function admin() {
+    if (localStorageAdmin) {
+      return (
+        <div>
+          <button type="button" className={classes.addNewCard} onClick={openAdd}>
+            Add card
+          </button>
+        </div>
+      );
+    }
+    return null;
+  }
+
   return (
     <div className={classes.gameLaunchWrapper}>
       <div className={classes.placeHolderBlock}>
@@ -162,6 +187,7 @@ const GameLauncher: React.FC = () => {
               />
             ))}
           </div>
+          {admin()}
         </div>
         <div className={classes.GamesBlock}>
           <p className={classes.title}>Products</p>
@@ -179,6 +205,7 @@ const GameLauncher: React.FC = () => {
           </div>
         </div>
       </div>
+      <ModalAdd isOpenAdd={isOpenAdd} closeAdd={closeAdd} />
     </div>
   );
 };

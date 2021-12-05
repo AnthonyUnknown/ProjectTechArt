@@ -63,3 +63,51 @@ export async function changeData(name: string, phone: string, img: string, id: n
   });
   return resp.data;
 }
+
+export async function changeEdit(
+  cardGame: string,
+  priceGame: string,
+  imgGame: string,
+  descGame: string,
+  categoryGame: string,
+  ageGame: string,
+  id: number,
+  newGameLaunch: string[]
+): Promise<void> {
+  await axios.patch(`http://localhost:3000/cards/${id}`, {
+    game: cardGame,
+    price: priceGame,
+    background: imgGame,
+    text: descGame,
+    genre: ["all", categoryGame],
+    age: ["all", ageGame],
+    gameLaunch: newGameLaunch,
+  });
+}
+
+export async function addCard(
+  cardGame: string,
+  priceGame: string,
+  imgGame: string,
+  descGame: string,
+  categoryGame: string,
+  ageGame: string,
+  newGameLaunch: string[],
+  today: string
+): Promise<void> {
+  await axios.post(`http://localhost:3000/cards/`, {
+    game: cardGame,
+    price: priceGame,
+    background: imgGame,
+    text: descGame,
+    genre: ["all", categoryGame],
+    age: ["all", ageGame],
+    gameLaunch: newGameLaunch,
+    stars: ["1", "2", "3", "4", "5"],
+    date: today,
+  });
+}
+
+export async function deleteCardYes(id: number): Promise<void> {
+  await axios.delete(`http://localhost:3000/cards/${id}`);
+}

@@ -8,6 +8,9 @@ const funcUserLog = (logObjEmail: string, logObjPass: string) =>
     try {
       const data = await login(logObjEmail, logObjPass);
       const dataUser = data.user;
+      if (logObjEmail === "admin@mail.ru" && logObjPass === "adminpage") {
+        localStorage.setItem("admin", "true");
+      }
       localStorage.setItem("user", JSON.stringify(dataUser));
       dispatch({ type: "GET_USER", payload: dataUser });
     } catch (errorUser) {

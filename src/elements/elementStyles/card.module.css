@@ -112,7 +112,7 @@
 .backCardButton {
   background: purple;
   color: white;
-  width: 100px;
+  width: 90px;
   height: 30px;
   border-radius: 5px;
   cursor: pointer;
@@ -123,4 +123,10 @@
   height: 100%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+}
+
+.buttonsBack {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
 }

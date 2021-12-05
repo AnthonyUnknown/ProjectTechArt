@@ -142,6 +142,7 @@ const Nav: React.FC<INavHeader> = ({
   function toHomePage(): void {
     history("/");
     localStorage.removeItem("user");
+    localStorage.removeItem("admin");
     dispatcher({ type: "GET_USER", payload: null });
     dispatcher({ type: "USER_STORAGE", payload: null });
   }
