@@ -67,3 +67,7 @@ export interface IData {
   phone: string;
   background: string;
 }
+
+export interface ICardCard {
+  card: ICard;
+}

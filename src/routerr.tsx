@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
+import { RiLoaderLine } from "react-icons/ri";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { register } from "@/products/apiHomePage";
 import { ToastContainer, toast } from "react-toastify";
 import HomePage from "./products/homePage";
-import AboutPage from "./products/aboutPage";
-import GameLauncher from "./components/gameLauncher/gameLauncher";
 import Header from "./components/header/header";
 import Footer from "./products/footer";
 import ProtectedRoute from "./components/protectedRoute";
 import "react-toastify/dist/ReactToastify.css";
-import UserPage from "./users/userPage";
+
+const CartPage = lazy(() => import("./components/cartPage/cartPage"));
+const AboutPage = lazy(() => import("./products/aboutPage"));
+const GameLauncher = lazy(() => import("./components/gameLauncher/gameLauncher"));
+const UserPage = lazy(() => import("./users/userPage"));
 
 const Routerr: React.FC = () => {
   const [isOpenSignIn, setIsOpenSignIn] = useState<boolean>(false);
@@ -58,7 +61,15 @@ const Routerr: React.FC = () => {
             path="/userpage"
             element={
               <ProtectedRoute onClickSign={onClickSign}>
-                <UserPage />
+                <Suspense
+                  fallback={
+                    <div className="loader">
+                      <RiLoaderLine className="loaderRi" />
+                    </div>
+                  }
+                >
+                  <UserPage />
+                </Suspense>
               </ProtectedRoute>
             }
           />
@@ -66,7 +77,15 @@ const Routerr: React.FC = () => {
             path="/about"
             element={
               <ProtectedRoute onClickSign={onClickSign}>
-                <AboutPage />
+                <Suspense
+                  fallback={
+                    <div className="loader">
+                      <RiLoaderLine className="loaderRi" />
+                    </div>
+                  }
+                >
+                  <AboutPage />
+                </Suspense>
               </ProtectedRoute>
             }
           />
@@ -75,7 +94,31 @@ const Routerr: React.FC = () => {
             path="/games/:title"
             element={
               <ProtectedRoute onClickSign={onClickSign}>
-                <GameLauncher />
+                <Suspense
+                  fallback={
+                    <div className="loader">
+                      <RiLoaderLine className="loaderRi" />
+                    </div>
+                  }
+                >
+                  <GameLauncher />
+                </Suspense>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cartpage"
+            element={
+              <ProtectedRoute onClickSign={onClickSign}>
+                <Suspense
+                  fallback={
+                    <div className="loader">
+                      <RiLoaderLine className="loaderRi" />
+                    </div>
+                  }
+                >
+                  <CartPage />
+                </Suspense>
               </ProtectedRoute>
             }
           />

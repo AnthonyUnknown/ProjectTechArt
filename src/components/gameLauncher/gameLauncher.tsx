@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useParams } from "react-router-dom";
+import { RiLoaderLine } from "react-icons/ri";
 import { ChangeEvent, useEffect, useState } from "react";
 import { ICard } from "@/interfaces";
 import { toast } from "react-toastify";
@@ -7,7 +8,17 @@ import Card from "@/elements/card";
 import InputBig from "@/elements/inputBig";
 import { apiGamesTypes, apiSearchGames } from "@/products/apiHomePage";
 import RadioBtn from "@/elements/radioBtn";
+import ModalAdd from "@/elements/modalAdd";
 import classes from "./gameLauncherStyles/gameLauncher.module.css";
+
+interface IRadioBtn {
+  idNumber: number;
+  type: string;
+  id: string;
+  name: string;
+  value: string;
+  labelname: string;
+}
 
 const GameLauncher: React.FC = () => {
   const { title } = useParams();
@@ -19,6 +30,30 @@ const GameLauncher: React.FC = () => {
   const [typeState, setTypeState] = useState<string>("asc");
   const [genresBtn, setGenresBtn] = useState("all");
   const [agesBtn, setAgesBtn] = useState("all");
+  const [loader, setLoader] = useState(true);
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
+
+  function openAdd() {
+    setIsOpenAdd(true);
+  }
+
+  function closeAdd() {
+    setIsOpenAdd(false);
+  }
+
+  const radioBtnsGenres: Array<IRadioBtn> = [
+    { idNumber: 1, id: "radio", type: "radio", name: "radio-btn", value: "all", labelname: "All genres" },
+    { idNumber: 2, id: "radio", type: "radio", name: "radio-btn", value: "shooter", labelname: "Shooter" },
+    { idNumber: 3, id: "radio", type: "radio", name: "radio-btn", value: "arcade", labelname: "Arcade" },
+    { idNumber: 4, id: "radio", type: "radio", name: "radio-btn", value: "survive", labelname: "Survive" },
+  ];
+
+  const radioBtnsAges: Array<IRadioBtn> = [
+    { idNumber: 1, id: "radioAge", type: "radio", name: "radio-btn-age", value: "all", labelname: "All" },
+    { idNumber: 2, id: "radioAge", type: "radio", name: "radio-btn-age", value: "six", labelname: "6+" },
+    { idNumber: 3, id: "radioAge", type: "radio", name: "radio-btn-age", value: "twelve", labelname: "12+" },
+    { idNumber: 4, id: "radioAge", type: "radio", name: "radio-btn-age", value: "eighteen", labelname: "18+" },
+  ];
 
   const isRadioSelected = (value: string) => genresBtn === value;
   const isRadioSelectedAge = (value: string) => agesBtn === value;
@@ -50,9 +85,11 @@ const GameLauncher: React.FC = () => {
   async function fetchCards() {
     try {
       const data = await apiGamesTypes(newTitle, criteriaState, typeState, genresBtn, agesBtn);
+      setLoader(false);
       setGetCards(data);
     } catch (e) {
       toast("Error!");
+      setLoader(false);
     }
   }
 
@@ -67,6 +104,21 @@ const GameLauncher: React.FC = () => {
   useEffect(() => {
     fetchCards();
   }, [newTitle, criteriaState, typeState, genresBtn, agesBtn]);
+
+  const localStorageAdmin = localStorage.getItem("admin");
+  function admin() {
+    if (localStorageAdmin) {
+      return (
+        <div>
+          <button type="button" className={classes.addNewCard} onClick={openAdd}>
+            Add card
+          </button>
+        </div>
+      );
+    }
+    return null;
+  }
+
   return (
     <div className={classes.gameLaunchWrapper}>
       <div className={classes.placeHolderBlock}>
@@ -89,9 +141,7 @@ const GameLauncher: React.FC = () => {
       <div className={classes.bottomBlockGL}>
         <div className={classes.categories}>
           <div className={classes.titleGL}>{newTitle}</div>
-          <hr className={classes.hr} />
           <div className={classes.titleGL}>Sort</div>
-          <hr className={classes.hr} />
           <div className={classes.selectNameBlock}>
             <div className={classes.selectNameBlockLabel}>
               <label htmlFor="selectName">Criteria</label>
@@ -116,95 +166,46 @@ const GameLauncher: React.FC = () => {
             </div>
           </div>
           <div className={classes.titleGL}>Genres</div>
-          <hr className={classes.hr} />
           <div className={classes.genresRadioBtns}>
-            <RadioBtn
-              type="radio"
-              id="radio"
-              name="radio-btn"
-              value="all"
-              labelname="All genres"
-              checked={isRadioSelected("all")}
-              onChange={onChange}
-            />
-            <RadioBtn
-              type="radio"
-              id="radio"
-              name="radio-btn"
-              value="shooter"
-              labelname="Shooter"
-              checked={isRadioSelected("shooter")}
-              onChange={onChange}
-            />
-            <RadioBtn
-              type="radio"
-              id="radio"
-              name="radio-btn"
-              value="arcade"
-              labelname="Arcade"
-              checked={isRadioSelected("arcade")}
-              onChange={onChange}
-            />
-            <RadioBtn
-              type="radio"
-              id="radio"
-              name="radio-btn"
-              value="survive"
-              labelname="Survive"
-              checked={isRadioSelected("survive")}
-              onChange={onChange}
-            />
+            {radioBtnsGenres.map((radioBtn) => (
+              <RadioBtn
+                radioBtn={radioBtn}
+                key={radioBtn.idNumber}
+                onChange={onChange}
+                checked={isRadioSelected(radioBtn.value)}
+              />
+            ))}
           </div>
           <div className={classes.titleGL}>Age</div>
-          <hr className={classes.hr} />
           <div className={classes.ageRadioBtns}>
-            <RadioBtn
-              type="radio"
-              id="radioAge"
-              name="radio-btn-age"
-              value="all"
-              labelname="All"
-              checked={isRadioSelectedAge("all")}
-              onChange={onChangeAge}
-            />
-            <RadioBtn
-              type="radio"
-              id="radioAge"
-              name="radio-btn-age"
-              value="six"
-              labelname="6+"
-              checked={isRadioSelectedAge("six")}
-              onChange={onChangeAge}
-            />
-            <RadioBtn
-              type="radio"
-              id="radioAge"
-              name="radio-btn-age"
-              value="twelve"
-              labelname="12+"
-              checked={isRadioSelectedAge("twelve")}
-              onChange={onChangeAge}
-            />
-            <RadioBtn
-              type="radio"
-              id="radioAge"
-              name="radio-btn-age"
-              value="eighteen"
-              labelname="18+"
-              checked={isRadioSelectedAge("eighteen")}
-              onChange={onChangeAge}
-            />
+            {radioBtnsAges.map((radioBtn) => (
+              <RadioBtn
+                radioBtn={radioBtn}
+                key={radioBtn.idNumber}
+                onChange={onChangeAge}
+                checked={isRadioSelectedAge(radioBtn.value)}
+              />
+            ))}
           </div>
+          {admin()}
         </div>
         <div className={classes.GamesBlock}>
           <p className={classes.title}>Products</p>
           <div className={classes.games}>
-            {getCards.map((card) => (
-              <Card card={card} key={card.id} />
-            ))}
+            {loader ? (
+              <div>
+                Loading games. Wait a bit...
+                <div>
+                  <RiLoaderLine className={classes} />
+                </div>
+              </div>
+            ) : (
+              getCards.map((card) => <Card card={card} key={card.id} />)
+            )}
           </div>
         </div>
       </div>
+      <ModalAdd isOpenAdd={isOpenAdd} closeAdd={closeAdd} />
     </div>
   );
 };

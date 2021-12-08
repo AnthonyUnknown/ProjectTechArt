@@ -1,5 +1,6 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { VscChevronDown } from "react-icons/vsc";
+import { BsBasket3Fill } from "react-icons/bs";
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import SignIn from "@/elements/signIn";
 import SignUp from "@/elements/signUp";
@@ -141,8 +142,13 @@ const Nav: React.FC<INavHeader> = ({
   function toHomePage(): void {
     history("/");
     localStorage.removeItem("user");
+    localStorage.removeItem("admin");
     dispatcher({ type: "GET_USER", payload: null });
     dispatcher({ type: "USER_STORAGE", payload: null });
+  }
+
+  function toCartPage(): void {
+    history("/cartpage");
   }
 
   useEffect(() => {
@@ -153,6 +159,7 @@ const Nav: React.FC<INavHeader> = ({
     }
   }, []);
   const localStorageUser = useTypedSelector((stateUser) => stateUser.user.user);
+  const games = useTypedSelector((stateCart) => stateCart.game.cartGames);
 
   if (localStorageUser) {
     menu = (
@@ -165,6 +172,12 @@ const Nav: React.FC<INavHeader> = ({
         <li className={classes.li}>
           <div onClick={toHomePage} onKeyDown={toHomePage} role="button" tabIndex={0} className={classes.a}>
             LogOut
+          </div>
+        </li>
+        <li className={classes.li}>
+          <div onClick={toCartPage} onKeyDown={toCartPage} role="button" tabIndex={0} className={classes.a}>
+            <BsBasket3Fill />
+            {games.length}
           </div>
         </li>
       </>
