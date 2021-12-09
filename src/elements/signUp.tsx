@@ -43,7 +43,7 @@ const SignUp: React.FC<ISignUp> = ({
   <>
     <Modal signIn={isOpenSignUp}>
       <form onSubmit={onSubmitReg}>
-        <div className={classes.signInWrapperReg}>
+        <div className={classes.signUpWrapperReg}>
           <div className={classes.authAndBut}>
             <p>Registation</p>
             <CrossButton onClick={onCloseSignedUp} />

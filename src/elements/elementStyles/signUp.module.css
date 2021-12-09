@@ -1,12 +1,5 @@
-.signInWrapper {
-  height: 250px;
-  width: 350px;
-  background-color: rgb(58, 56, 56);
-  border-radius: 15px;
-}
-
-.signInWrapperReg {
-  height: 300px;
+.signUpWrapperReg {
+  height: 350px;
   width: 350px;
   background-color: rgb(58, 56, 56);
   border-radius: 15px;

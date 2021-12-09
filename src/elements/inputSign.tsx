@@ -13,10 +13,10 @@ interface IInput {
 const InputSign: React.FC<IInput> = (props) => (
   <div className={classes.inputAndLabel}>
     <div>
-      <label htmlFor="name">{props.labelname}</label>
+      <label htmlFor={props.name}>{props.labelname}</label>
     </div>
     <div>
-      <input {...props} className={classes.inputSign} id="name" />
+      <input {...props} className={classes.inputSign} id={props.name} />
     </div>
   </div>
 );

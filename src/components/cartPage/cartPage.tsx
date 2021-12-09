@@ -12,14 +12,22 @@ const CartPage: React.FC = () => {
   const [gamesRemove, setGamesRemove] = useState<number[]>([]);
   const games = useTypedSelector((stateCart) => stateCart.game.cartGames);
   const dispatch = useDispatch();
+
   function onClickBuy() {
     dispatch({ type: BUY_GAMES });
     setGamesCost(0);
     setBalance(balance - gamesCost);
   }
-  function costChanger(cost: number) {
-    const coster = games.reduce((sum, current) => sum + Number(current.price) * cost, 0);
-    setGamesCost(coster);
+
+  function costChanger(cardId: number, amount: number) {
+    const newArray = games.map((item) => {
+      if (item.id === cardId) {
+        return { ...item, price: Number(item.price) * amount };
+      }
+      return item;
+    });
+    const gamesCostBasket = newArray.reduce((sum, item) => sum + Number(item.price), 0);
+    setGamesCost(gamesCostBasket);
   }
 
   function onGamesRemove(gameCardId: number) {

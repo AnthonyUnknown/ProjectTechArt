@@ -66,7 +66,7 @@ export async function changeData(name: string, phone: string, img: string, id: n
 
 export async function changeEdit(
   cardGame: string,
-  priceGame: string,
+  priceGame: number | string,
   imgGame: string,
   descGame: string,
   categoryGame: string,
@@ -87,7 +87,7 @@ export async function changeEdit(
 
 export async function addCard(
   cardGame: string,
-  priceGame: string,
+  priceGame: number | string,
   imgGame: string,
   descGame: string,
   categoryGame: string,
