@@ -171,7 +171,7 @@ const GameLauncher: React.FC = () => {
               <div>
                 Loading games. Wait a bit...
                 <div>
-                  <RiLoaderLine className={classes} />
+                  <RiLoaderLine className={classes.loader} />
                 </div>
               </div>
             ) : (

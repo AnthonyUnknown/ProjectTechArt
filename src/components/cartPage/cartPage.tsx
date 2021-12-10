@@ -45,6 +45,7 @@ const CartPage: React.FC = () => {
       });
     }
   }
+
   return (
     <div className={classes.wrapperCP}>
       <div className={classes.cartBlock}>

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { ICard } from "@/interfaces";
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { addCard, changeEdit } from "@/products/apiHomePage";
 import { toast } from "react-toastify";
 import Modal from "./modal";
@@ -102,15 +102,6 @@ const ModalEdit: React.FC<IModalEdit> = ({ isOpenEdit, closeEdit, card, fetchCar
     }
     closeEdit();
   }
-
-  useEffect(() => {
-    if (fetchCards) {
-      fetchCards();
-    }
-    if (fetchTopCards) {
-      fetchTopCards();
-    }
-  }, []);
 
   return (
     <Modal signIn={isOpenEdit}>
