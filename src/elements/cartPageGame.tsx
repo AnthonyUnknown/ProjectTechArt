@@ -1,10 +1,10 @@
 import { ICard } from "@/interfaces";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState, memo } from "react";
 import classes from "./elementStyles/cartPageGame.module.css";
 
 interface ICardItem {
   card: ICard;
-  costChanger: (cost: number) => void;
+  costChanger: (cost: number, amount: number) => void;
   onGamesRemove: (gameCardId: number) => void;
   onGamesRemoveCheck: (gameCardId: number) => void;
 }
@@ -15,8 +15,9 @@ const CartPageGame: React.FC<ICardItem> = ({ card, costChanger, onGamesRemove, o
   const today = new Date().toISOString().slice(0, 10);
 
   function onChangeAmount(event: ChangeEvent<HTMLInputElement>) {
-    setAmount(Number(event.target.value));
+    setAmount(Number(event.currentTarget.value));
   }
+
   function onChangeChecked(e: ChangeEvent<HTMLInputElement>) {
     setChecked(!checked);
     if (e.target.checked === true) {
@@ -25,9 +26,11 @@ const CartPageGame: React.FC<ICardItem> = ({ card, costChanger, onGamesRemove, o
       onGamesRemoveCheck(card.id);
     }
   }
+
   useEffect(() => {
-    costChanger(amount);
+    costChanger(card.id, amount);
   }, [amount]);
+
   return (
     <div className={classes.tableTitle}>
       <div className={classes.tableTitleItem}>{card.game}</div>
@@ -56,4 +59,4 @@ const CartPageGame: React.FC<ICardItem> = ({ card, costChanger, onGamesRemove, o
   );
 };
 
-export default CartPageGame;
+export default memo(CartPageGame);

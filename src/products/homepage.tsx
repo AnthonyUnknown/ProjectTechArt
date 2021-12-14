@@ -6,11 +6,13 @@ import Card from "@/elements/card";
 import { ICard } from "@/interfaces";
 import { useState, useEffect, ChangeEvent } from "react";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { getTopThreeCards } from "@/redux/actionFunctions";
+import useTypedSelector from "@/redux/hookSelector/useTypedSelector";
 import classes from "./productsStyles/homePage.module.css";
-import { apiGetTopCards, apiSearchGames } from "./apiHomePage";
+import { apiSearchGames } from "./apiHomePage";
 
 const HomePage: React.FC = () => {
-  const [getCards, setGetCards] = useState<ICard[]>([]);
   const [search, setSearch] = useState<string>("");
   const [searchGames, setSearchGames] = useState<ICard[]>([]);
   const searchChanger = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,18 +31,17 @@ const HomePage: React.FC = () => {
     return null;
   };
 
-  async function fetchTopCards() {
-    try {
-      const data = await apiGetTopCards();
-      setGetCards(data);
-    } catch (e) {
-      toast("Error");
-    }
+  const dispatch = useDispatch();
+
+  function fetchTopCards(): void {
+    dispatch(getTopThreeCards());
   }
 
   useEffect(() => {
     fetchTopCards();
   }, []);
+
+  const getCards = useTypedSelector((stateTop) => stateTop.topCards.cardsTopGames);
 
   return (
     <div className={classes.wrapperHomePage}>
@@ -82,7 +83,7 @@ const HomePage: React.FC = () => {
         <p className={classes.title}>New Games</p>
         <div className={classes.threeTopGames}>
           {getCards.map((card) => (
-            <Card card={card} key={card.id} />
+            <Card card={card} key={card.id} fetchTopCards={fetchTopCards} />
           ))}
         </div>
       </div>

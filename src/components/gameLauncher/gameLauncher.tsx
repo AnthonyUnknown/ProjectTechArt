@@ -6,9 +6,11 @@ import { ICard } from "@/interfaces";
 import { toast } from "react-toastify";
 import Card from "@/elements/card";
 import InputBig from "@/elements/inputBig";
-import { apiGamesTypes, apiSearchGames } from "@/products/apiHomePage";
+import { apiSearchGames } from "@/products/apiHomePage";
 import RadioBtn from "@/elements/radioBtn";
-import ModalAdd from "@/elements/modalAdd";
+import { userLauncher } from "@/redux/actionFunctions";
+import { useDispatch } from "react-redux";
+import useTypedSelector from "@/redux/hookSelector/useTypedSelector";
 import classes from "./gameLauncherStyles/gameLauncher.module.css";
 
 interface IRadioBtn {
@@ -23,7 +25,6 @@ interface IRadioBtn {
 const GameLauncher: React.FC = () => {
   const { title } = useParams();
   const newTitle = title?.slice(1);
-  const [getCards, setGetCards] = useState<ICard[]>([]);
   const [search, setSearch] = useState<string>("");
   const [searchGames, setSearchGames] = useState<ICard[]>([]);
   const [criteriaState, setCriteriaState] = useState<string>("price");
@@ -31,15 +32,6 @@ const GameLauncher: React.FC = () => {
   const [genresBtn, setGenresBtn] = useState("all");
   const [agesBtn, setAgesBtn] = useState("all");
   const [loader, setLoader] = useState(true);
-  const [isOpenAdd, setIsOpenAdd] = useState(false);
-
-  function openAdd() {
-    setIsOpenAdd(true);
-  }
-
-  function closeAdd() {
-    setIsOpenAdd(false);
-  }
 
   const radioBtnsGenres: Array<IRadioBtn> = [
     { idNumber: 1, id: "radio", type: "radio", name: "radio-btn", value: "all", labelname: "All genres" },
@@ -82,16 +74,14 @@ const GameLauncher: React.FC = () => {
     return null;
   };
 
-  async function fetchCards() {
-    try {
-      const data = await apiGamesTypes(newTitle, criteriaState, typeState, genresBtn, agesBtn);
-      setLoader(false);
-      setGetCards(data);
-    } catch (e) {
-      toast("Error!");
-      setLoader(false);
-    }
+  const dispatch = useDispatch();
+
+  function fetchCards() {
+    dispatch(userLauncher(newTitle, criteriaState, typeState, genresBtn, agesBtn));
+    setLoader(false);
   }
+
+  const fetchCardsLauncher = useTypedSelector((stateLauncher) => stateLauncher.launcher.cardsLauncherGames);
 
   function onChangeCriteria(event: ChangeEvent<HTMLSelectElement>) {
     setCriteriaState(event.target.value);
@@ -104,20 +94,6 @@ const GameLauncher: React.FC = () => {
   useEffect(() => {
     fetchCards();
   }, [newTitle, criteriaState, typeState, genresBtn, agesBtn]);
-
-  const localStorageAdmin = localStorage.getItem("admin");
-  function admin() {
-    if (localStorageAdmin) {
-      return (
-        <div>
-          <button type="button" className={classes.addNewCard} onClick={openAdd}>
-            Add card
-          </button>
-        </div>
-      );
-    }
-    return null;
-  }
 
   return (
     <div className={classes.gameLaunchWrapper}>
@@ -187,7 +163,6 @@ const GameLauncher: React.FC = () => {
               />
             ))}
           </div>
-          {admin()}
         </div>
         <div className={classes.GamesBlock}>
           <p className={classes.title}>Products</p>
@@ -196,18 +171,16 @@ const GameLauncher: React.FC = () => {
               <div>
                 Loading games. Wait a bit...
                 <div>
-                  <RiLoaderLine className={classes} />
+                  <RiLoaderLine className={classes.loader} />
                 </div>
               </div>
             ) : (
-              getCards.map((card) => <Card card={card} key={card.id} />)
+              fetchCardsLauncher.map((card) => <Card card={card} key={card.id} fetchCards={fetchCards} />)
             )}
           </div>
         </div>
       </div>
-      <ModalAdd isOpenAdd={isOpenAdd} closeAdd={closeAdd} />
     </div>
   );
 };
-
 export default GameLauncher;

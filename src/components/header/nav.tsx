@@ -160,6 +160,7 @@ const Nav: React.FC<INavHeader> = ({
   }, []);
   const localStorageUser = useTypedSelector((stateUser) => stateUser.user.user);
   const games = useTypedSelector((stateCart) => stateCart.game.cartGames);
+  const localStorageAdmin = localStorage.getItem("admin");
 
   if (localStorageUser) {
     menu = (
@@ -174,12 +175,14 @@ const Nav: React.FC<INavHeader> = ({
             LogOut
           </div>
         </li>
-        <li className={classes.li}>
-          <div onClick={toCartPage} onKeyDown={toCartPage} role="button" tabIndex={0} className={classes.a}>
-            <BsBasket3Fill />
-            {games.length}
-          </div>
-        </li>
+        {localStorageAdmin ? null : (
+          <li className={classes.li}>
+            <div onClick={toCartPage} onKeyDown={toCartPage} role="button" tabIndex={0} className={classes.a}>
+              <BsBasket3Fill />
+              {games.length}
+            </div>
+          </li>
+        )}
       </>
     );
   } else {

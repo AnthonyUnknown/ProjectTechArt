@@ -2,7 +2,7 @@ export interface ICard {
   id: number;
   background: string;
   game: string;
-  price: string;
+  price: number;
   text: string;
   stars: Array<string>;
   gameLaunch: Array<string>;
@@ -70,4 +70,6 @@ export interface IData {
 
 export interface ICardCard {
   card: ICard;
+  fetchTopCards?: () => void;
+  fetchCards?: () => void;
 }

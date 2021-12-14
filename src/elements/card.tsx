@@ -1,9 +1,9 @@
+import { useState, memo } from "react";
 import { FaPlaystation, FaXbox } from "react-icons/fa";
 import { AiFillWindows } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { ICard, ICardCard } from "@/interfaces";
 import { SET_GAME } from "@/redux/reducers/userCartReducer";
-import { useState } from "react";
 import classes from "./elementStyles/card.module.css";
 import ModalEdit from "./modalEdit";
 import ModalConfirm from "./modalConfirm";
@@ -14,8 +14,9 @@ const platformIconMapping: { [key: string]: React.ReactElement } = {
   xbox: <FaXbox />,
 };
 
-const Card: React.FC<ICardCard> = ({ card }) => {
+const Card: React.FC<ICardCard> = ({ card, fetchTopCards, fetchCards }) => {
   const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [isOpenEditAdd, setIsOpenEditAdd] = useState(false);
   const [isOpenConfirm, setIsOpenConfirm] = useState(false);
   const dispatch = useDispatch();
   const localStorageAdmin = localStorage.getItem("admin");
@@ -28,8 +29,16 @@ const Card: React.FC<ICardCard> = ({ card }) => {
     setIsOpenEdit(true);
   }
 
+  function openEditAdd() {
+    setIsOpenEditAdd(true);
+  }
+
   function closeEdit() {
     setIsOpenEdit(false);
+  }
+
+  function closeEditAdd() {
+    setIsOpenEditAdd(false);
   }
 
   function openConfirm() {
@@ -59,6 +68,19 @@ const Card: React.FC<ICardCard> = ({ card }) => {
         <div>
           <button type="button" className={classes.backCardButton} onClick={openConfirm}>
             Delete card
+          </button>
+        </div>
+      );
+    }
+    return null;
+  }
+
+  function adminAdd() {
+    if (localStorageAdmin) {
+      return (
+        <div>
+          <button type="button" className={classes.backCardButton} onClick={openEditAdd}>
+            Add card
           </button>
         </div>
       );
@@ -96,21 +118,42 @@ const Card: React.FC<ICardCard> = ({ card }) => {
           <div className={classes.backCard}>
             <p className={classes.backCardText}>{card.text}</p>
             <div className={classes.buttonsBack}>
-              <div>
-                <button type="button" className={classes.backCardButton} onClick={() => addToCart(card)}>
-                  Add to cart
-                </button>
-              </div>
+              {localStorageAdmin ? null : (
+                <div>
+                  <button type="button" className={classes.backCardButton} onClick={() => addToCart(card)}>
+                    Add to cart
+                  </button>
+                </div>
+              )}
               {admin()}
             </div>
             {adminDelete()}
+            {adminAdd()}
           </div>
         </div>
       </div>
-      <ModalEdit isOpenEdit={isOpenEdit} closeEdit={closeEdit} card={card} />
-      <ModalConfirm isOpenConfirm={isOpenConfirm} closeConfirm={closeConfirm} card={card} />
+      <ModalEdit
+        isOpenEdit={isOpenEdit}
+        closeEdit={closeEdit}
+        card={card}
+        fetchCards={fetchCards}
+        fetchTopCards={fetchTopCards}
+      />
+      <ModalEdit
+        isOpenEdit={isOpenEditAdd}
+        closeEdit={closeEditAdd}
+        fetchCards={fetchCards}
+        fetchTopCards={fetchTopCards}
+      />
+      <ModalConfirm
+        isOpenConfirm={isOpenConfirm}
+        closeConfirm={closeConfirm}
+        card={card}
+        fetchTopCards={fetchTopCards}
+        fetchCards={fetchCards}
+      />
     </div>
   );
 };
 
-export default Card;
+export default memo(Card);

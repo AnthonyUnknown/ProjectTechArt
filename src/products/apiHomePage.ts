@@ -49,14 +49,14 @@ export async function login(mail: string, pass: string): Promise<IUser> {
 }
 
 export async function changePassUserApi(password: string, id: number | undefined): Promise<IChangePass> {
-  const resp = await axios.patch(`http://localhost:3000/users/${id}`, {
+  const resp = await axios.patch(endpoints.apiIdUsers(id), {
     password,
   });
   return resp.data;
 }
 
 export async function changeData(name: string, phone: string, img: string, id: number | undefined): Promise<IUserUser> {
-  const resp = await axios.patch(`http://localhost:3000/users/${id}`, {
+  const resp = await axios.patch(endpoints.apiIdUsers(id), {
     userName: name,
     userPhone: phone,
     userImg: img,
@@ -66,7 +66,7 @@ export async function changeData(name: string, phone: string, img: string, id: n
 
 export async function changeEdit(
   cardGame: string,
-  priceGame: string,
+  priceGame: number | string,
   imgGame: string,
   descGame: string,
   categoryGame: string,
@@ -74,7 +74,7 @@ export async function changeEdit(
   id: number,
   newGameLaunch: string[]
 ): Promise<void> {
-  await axios.patch(`http://localhost:3000/cards/${id}`, {
+  await axios.patch(endpoints.apiIdCards(id), {
     game: cardGame,
     price: priceGame,
     background: imgGame,
@@ -87,7 +87,7 @@ export async function changeEdit(
 
 export async function addCard(
   cardGame: string,
-  priceGame: string,
+  priceGame: number | string,
   imgGame: string,
   descGame: string,
   categoryGame: string,
@@ -95,7 +95,7 @@ export async function addCard(
   newGameLaunch: string[],
   today: string
 ): Promise<void> {
-  await axios.post(`http://localhost:3000/cards/`, {
+  await axios.post(endpoints.apiCards, {
     game: cardGame,
     price: priceGame,
     background: imgGame,
@@ -109,5 +109,5 @@ export async function addCard(
 }
 
 export async function deleteCardYes(id: number): Promise<void> {
-  await axios.delete(`http://localhost:3000/cards/${id}`);
+  await axios.delete(endpoints.apiIdCards(id));
 }
