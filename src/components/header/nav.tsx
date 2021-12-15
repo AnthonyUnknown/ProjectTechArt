@@ -120,13 +120,13 @@ const Nav: React.FC<INavHeader> = ({
   }
 
   const dispatcher = useDispatch();
-
   function onSubmitLog(e: SyntheticEvent) {
     e.preventDefault();
     let historyPath = "/";
     dispatcher(funcUserLog(logObjEmail, logObjPass));
     if (state && state.from) {
       historyPath = state.from;
+      onCloseSign();
     }
     history(historyPath);
     setLogObjEmail("");

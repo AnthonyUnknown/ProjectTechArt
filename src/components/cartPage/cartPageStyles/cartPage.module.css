@@ -84,3 +84,14 @@
   font-size: 24px;
   color: purple;
 }
+
+@media only screen and (max-width: 768px) {
+  .cartBlock {
+    width: 95%;
+  }
+
+  .tableTitleItem {
+    writing-mode: tb-rl;
+    transform: rotate(180deg);
+  }
+}

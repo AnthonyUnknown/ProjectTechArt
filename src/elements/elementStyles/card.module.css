@@ -130,3 +130,26 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media only screen and (max-width: 1200px) {
+  .cardPlace {
+    width: 180px;
+    height: 380px;
+  }
+
+  .backCardText {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .cardWrapper {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .cardWrapper {
+    width: 100%;
+  }
+}

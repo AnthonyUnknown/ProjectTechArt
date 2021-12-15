@@ -164,7 +164,7 @@ const GameLauncher: React.FC = () => {
             ))}
           </div>
         </div>
-        <div className={classes.GamesBlock}>
+        <div className={classes.gamesBlock}>
           <p className={classes.title}>Products</p>
           <div className={classes.games}>
             {loader ? (

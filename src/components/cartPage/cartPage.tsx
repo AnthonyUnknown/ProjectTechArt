@@ -50,29 +50,31 @@ const CartPage: React.FC = () => {
     <div className={classes.wrapperCP}>
       <div className={classes.cartBlock}>
         <div className={classes.titleCP}>Cart Page</div>
-        <div className={classes.tableTitle}>
-          <div className={classes.tableTitleItem}>Name</div>
-          <div className={classes.tableTitleItem}>Platform</div>
-          <div className={classes.tableTitleItem}>Order date</div>
-          <div className={classes.tableTitleItem}>Amount</div>
-          <div className={classes.tableTitleItem}>Price($)</div>
-          <div className={classes.tableTitleItem} />
-        </div>
-        {games.length === 0 ? (
-          <div className={classes.emptyBasket}>
-            <p>Basket is empty</p>
+        <div className={classes.table}>
+          <div className={classes.tableTitle}>
+            <div className={classes.tableTitleItem}>Name</div>
+            <div className={classes.tableTitleItem}>Platform</div>
+            <div className={classes.tableTitleItem}>Order date</div>
+            <div className={classes.tableTitleItem}>Amount</div>
+            <div className={classes.tableTitleItem}>Price($)</div>
+            <div className={classes.tableTitleItem} />
           </div>
-        ) : (
-          games.map((card) => (
-            <CartPageGame
-              card={card}
-              key={card.id}
-              costChanger={costChanger}
-              onGamesRemove={onGamesRemove}
-              onGamesRemoveCheck={onGamesRemoveCheck}
-            />
-          ))
-        )}
+          {games.length === 0 ? (
+            <div className={classes.emptyBasket}>
+              <p>Basket is empty</p>
+            </div>
+          ) : (
+            games.map((card) => (
+              <CartPageGame
+                card={card}
+                key={card.id}
+                costChanger={costChanger}
+                onGamesRemove={onGamesRemove}
+                onGamesRemoveCheck={onGamesRemoveCheck}
+              />
+            ))
+          )}
+        </div>
         <div className={classes.submitCP}>
           <Submit buttonname="Remove" onClick={onRemove} />
         </div>

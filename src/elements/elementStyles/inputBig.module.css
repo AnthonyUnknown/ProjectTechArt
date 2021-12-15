@@ -6,3 +6,15 @@
   background: rgb(214, 211, 211);
   color: black;
 }
+
+@media only screen and (max-width: 768px) {
+  .placeholder {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .placeholder {
+    width: 200px;
+  }
+}
