@@ -32,3 +32,40 @@
   width: 20px;
   height: 20px;
 }
+
+@media only screen and (max-width: 1200px) {
+  .inputCP {
+    width: 100px;
+  }
+
+  .selectCP {
+    width: 100px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .inputCP {
+    width: 80px;
+  }
+
+  .selectCP {
+    width: 80px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tableTitleItem {
+    writing-mode: tb-rl;
+    transform: rotate(180deg);
+    display: flex;
+    align-items: start;
+  }
+
+  .selectCP {
+    transform: rotate(90deg);
+  }
+
+  .inputCP {
+    transform: rotate(90deg);
+  }
+}

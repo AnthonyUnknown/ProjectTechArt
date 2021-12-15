@@ -1,6 +1,6 @@
 .modalEditWrapper {
-  height: 80vh;
-  width: 35vw;
+  height: 800px;
+  width: 700px;
   background-color: rgb(58, 56, 56);
   border-radius: 15px;
 }
@@ -84,4 +84,11 @@
   display: flex;
   justify-content: space-evenly;
   margin-top: 50px;
+}
+
+@media only screen and (max-width: 992px) {
+  .modalEditWrapper {
+    height: 850px;
+    width: 600px;
+  }
 }

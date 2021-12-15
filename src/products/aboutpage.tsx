@@ -1,3 +1,5 @@
-const AboutPage: React.FC = () => <div style={{ height: "300px" }}>AboutPage!!!</div>;
+import classes from "./productsStyles/aboutPage.module.css";
+
+const AboutPage: React.FC = () => <div className={classes.aboutPage} />;
 
 export default AboutPage;

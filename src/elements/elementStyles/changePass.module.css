@@ -1,5 +1,5 @@
 .changePassWrapper {
-  height: 260px;
+  height: 295px;
   width: 360px;
   background-color: rgb(58, 56, 56);
   border-radius: 15px;
@@ -35,4 +35,14 @@
   top: 127px;
   left: 25px;
   color: red;
+}
+
+@media only screen and (max-width: 992px) {
+  .changePassWrapper {
+    width: 320px;
+  }
+
+  .logBlurRepeatError {
+    top: 160px;
+  }
 }

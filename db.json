@@ -90,7 +90,9 @@
         "3",
         "4"
       ],
-      "gameLaunch": [],
+      "gameLaunch": [
+        "pc"
+      ],
       "date": "2021-11-29",
       "genre": [
         "all",
@@ -271,9 +273,9 @@
     {
       "email": "tester@mail.ru",
       "password": "$2a$10$5/gw0luDGdvSfr2ENk.//uZe/4tJecUQ7F3oeY8wegRnFOpYBWMCO",
-      "userName": "Dendi",
+      "userName": "Anton",
       "userPhone": "+375336292905",
-      "userImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtNEMqzI4Qxo9b2IRANnL6MPBQryY_gP9XAQ&usqp=CAU",
+      "userImg": "https://millionstatusov.ru/pic/statpic/all8/5e04c21a52a39.jpg",
       "id": 17
     },
     {
@@ -291,6 +293,14 @@
       "userPhone": "NoPhone",
       "userImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEzy37KsQmCvQvjDeap4heO6hXR46cbpVfPw&usqp=CAU",
       "id": 19
+    },
+    {
+      "email": "testmail@mail.ru",
+      "password": "$2a$10$8jPUvy.xId5K9S53KgCBGuOOvOu.rd6NStcmOQ8CP6YthG8.7ScxW",
+      "userName": "Default",
+      "userPhone": "Default",
+      "userImg": "Default",
+      "id": 20
     }
   ]
 }

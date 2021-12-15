@@ -38,3 +38,23 @@
   left: 25px;
   color: red;
 }
+
+@media only screen and (max-width: 992px) {
+  .authAndBut {
+    margin-bottom: 0px;
+  }
+
+  .errorPass {
+    top: 200px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .signUpWrapperReg {
+    width: 300px;
+  }
+
+  .logBlurError {
+    top: 50px;
+  }
+}

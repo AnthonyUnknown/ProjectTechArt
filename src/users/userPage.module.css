@@ -66,3 +66,21 @@
 .bottomBlock {
   margin-top: 50px;
 }
+
+@media only screen and (max-width: 1200px) {
+  .userPageImg {
+    width: 200px;
+    height: 250px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .userPageContent {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userPage {
+    height: 110vh;
+  }
+}

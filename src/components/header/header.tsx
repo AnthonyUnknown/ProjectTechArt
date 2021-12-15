@@ -1,6 +1,7 @@
 import { INavHeader } from "@/interfaces";
-import Nav from "./nav";
 import headers from "./headerStyles/header.module.css";
+import NormalNav from "./normalNav";
+import MobileNav from "./mobileNav";
 
 const Header: React.FC<INavHeader> = ({
   onReg,
@@ -13,15 +14,26 @@ const Header: React.FC<INavHeader> = ({
 }) => (
   <header className={headers.header}>
     <div className={headers.pageName}>Games Shop</div>
-    <Nav
-      onReg={onReg}
-      onClickSign={onClickSign}
-      isOpenSignIn={isOpenSignIn}
-      onCloseSign={onCloseSign}
-      isOpenSignUp={isOpenSignUp}
-      onClickSignUp={onClickSignUp}
-      onCloseSignUp={onCloseSignUp}
-    />
+    <div className={headers.navBar}>
+      <MobileNav
+        onReg={onReg}
+        onClickSign={onClickSign}
+        isOpenSignIn={isOpenSignIn}
+        onCloseSign={onCloseSign}
+        isOpenSignUp={isOpenSignUp}
+        onClickSignUp={onClickSignUp}
+        onCloseSignUp={onCloseSignUp}
+      />
+      <NormalNav
+        onReg={onReg}
+        onClickSign={onClickSign}
+        isOpenSignIn={isOpenSignIn}
+        onCloseSign={onCloseSign}
+        isOpenSignUp={isOpenSignUp}
+        onClickSignUp={onClickSignUp}
+        onCloseSignUp={onCloseSignUp}
+      />
+    </div>
   </header>
 );
 

@@ -70,3 +70,32 @@
 .liProd:hover > .ul1 {
   display: block;
 }
+
+@media only screen and (max-width: 768px) {
+  .ul {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0px;
+    top: 35px;
+    background: rgb(30, 30, 31);
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .a,
+  .prod {
+    width: 100%;
+    text-align: start;
+  }
+
+  .ul1 {
+    top: 100px;
+    right: 0px;
+    width: 75%;
+  }
+
+  .li1 {
+    border-radius: 5px;
+  }
+}

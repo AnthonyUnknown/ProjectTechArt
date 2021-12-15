@@ -30,3 +30,24 @@
     text-shadow: 0 -1px rgba(0, 0, 0, 0.3), 0 0 5px #ffd, 0 0 8px #fff;
   }
 }
+
+.navBar .mobileNav {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .navBar .normalNav {
+    display: none;
+  }
+
+  .navBar .mobileNav {
+    display: flex;
+    align-items: center;
+  }
+
+  .navBar .mobileNav .hamburgerMenu {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+  }
+}

@@ -4,7 +4,7 @@ import { AiFillWindows } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import Card from "@/elements/card";
 import { ICard } from "@/interfaces";
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { getTopThreeCards } from "@/redux/actionFunctions";
@@ -67,15 +67,15 @@ const HomePage: React.FC = () => {
         <div className={classes.gameIcons}>
           <NavLink className={classes.iconBlock} to="/games/pc">
             <AiFillWindows className={classes.icon} />
-            <p style={{ fontWeight: "bold" }}>PC</p>
+            <p className={classes.gameLauncer}>PC</p>
           </NavLink>
           <NavLink className={classes.iconBlock} to="/games/playstation">
             <FaPlaystation className={classes.icon} />
-            <p style={{ fontWeight: "bold" }}>Playstation 5</p>
+            <p className={classes.gameLauncer}>Playstation 5</p>
           </NavLink>
           <NavLink className={classes.iconBlock} to="/games/xbox">
             <FaXbox className={classes.icon} />
-            <p style={{ fontWeight: "bold" }}>XBox One</p>
+            <p className={classes.gameLauncer}>XBox One</p>
           </NavLink>
         </div>
       </div>
